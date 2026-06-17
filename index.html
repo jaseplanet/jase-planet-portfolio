@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Jase Planet · 3D Animation Studio</title>
 <meta name="description" content="Jase Planet — Estudio creativo de animación 3D en Buenos Aires, Argentina." />
-<!-- Meta Pixel Code goes here -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -39,8 +38,8 @@
   #works h2{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:8px}
   #works .mono{margin-bottom:40px;color:var(--accent)}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;transition:all .35s cubic-bezier(.2,.7,.2,1)}
-  .thumb{aspect-ratio:16/9;border-radius:8px;background:#000;position:relative;overflow:hidden;margin-bottom:14px;display:block}
+  .card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:default;transition:all .35s cubic-bezier(.2,.7,.2,1)}
+  .thumb{aspect-ratio:16/9;border-radius:8px;background:#000;position:relative;overflow:hidden;margin-bottom:14px;display:block;cursor:pointer}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
   .thumb:hover img{transform:scale(1.04)}
   .thumb .play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.35))}
@@ -51,12 +50,13 @@
   .card h3{font-size:1.3rem;margin-bottom:6px}
   .card p{font-size:0.85rem;color:var(--muted)}
   .card:hover{border-color:var(--accent);transform:translateY(-4px) scale(1.015);box-shadow:0 20px 40px -20px rgba(120,19,39,0.4)}
+  .view-yt-btn:hover {border-color:var(--accent) !important;color:#fff !important;background:rgba(120,19,39,0.1) !important;}
   aside.viewer{position:sticky;top:120px;width:380px;height:600px;min-height:600px;display:flex;align-items:center;justify-content:center;background:transparent}
   #three-canvas{width:100%;height:100%;min-width:380px;min-height:600px;display:block}
   .viewer-label{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);white-space:nowrap}
   footer{position:relative;z-index:2;margin-top:120px;padding:80px 36px 30px;border-top:1px solid var(--border);background:rgba(10,11,11,0.6)}
   .footer-inner{max-width:1100px;margin:0 auto}
-  .footer-hero{text-align:center;margin-bottom:60px}
+  .footer-hero reveal{text-align:center;margin-bottom:60px}
   .footer-hero h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:18px}
   .footer-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1rem}
   form{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
@@ -244,6 +244,7 @@ const I18N = {
     rights:"Todos los derechos reservados",
     roles:"3D Generalist · Director Creativo · Guionista",
     project_desc:"Animación 3D · Dirección creativa",
+    view_on_yt:"Ver en YouTube",
     proj1_title:"TADC Fanart Ponmi",
     proj1_desc:"Animación 3D · Blender · Cinematic",
     proj2_title:"Hice a mi novia estilo Cyberpunk",
@@ -287,6 +288,7 @@ const I18N = {
     rights:"All rights reserved",
     roles:"3D Generalist · Creative Director · Screenwriter",
     project_desc:"3D animation · Creative direction",
+    view_on_yt:"Watch on YouTube",
     proj1_title:"TADC Fanart Ponmi",
     proj1_desc:"3D Animation · Blender · Cinematic",
     proj2_title:"I Made My Girlfriend in Cyberpunk Style",
@@ -378,17 +380,39 @@ function renderWorks(){
     card.className='card';
     const title = I18N[currentLang][p.key+'_title'];
     const desc = I18N[currentLang][p.key+'_desc'];
+    const ytBtnText = I18N[currentLang]['view_on_yt'];
     card.innerHTML = `
       <div class="thumb" data-vid="${p.id}">
-        <img loading="lazy" src="https://img.youtube.com/vi/${p.id}/maxresdefault.jpg" alt="${title}" data-yt="${p.id}" data-step="0" onerror="ytThumbFallback(this)">
-        <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="video-container" style="width:100%; height:100%; position:relative;">
+          <img loading="lazy" src="https://img.youtube.com/vi/${p.id}/maxresdefault.jpg" alt="${title}" data-yt="${p.id}" data-step="0" onerror="ytThumbFallback(this)">
+          <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
       </div>
       <h3 data-i18n="${p.key}_title" style="font-family:'Fraunces',serif;font-style:italic;">${title}</h3>
-      <p data-i18n="${p.key}_desc" style="font-family:'Inter',sans-serif;font-weight:300;">${desc}</p>`;
+      <p data-i18n="${p.key}_desc" style="font-family:'Inter',sans-serif;font-weight:300; margin-bottom: 12px;">${desc}</p>
+      <button class="mono view-yt-btn" data-vid="${p.id}" style="background:none; border:1px solid var(--border); color:var(--muted); padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.65rem; transition:all 0.2s ease;">
+        ${ytBtnText}
+      </button>`;
+    
     card.querySelector('.thumb').addEventListener('click', function(){
+      if(this.querySelector('iframe')) return;
+      const id = this.dataset.vid;
+      this.innerHTML = `
+        <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen 
+                style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;">
+        </iframe>`;
+    });
+
+    card.querySelector('.view-yt-btn').addEventListener('click', function(e){
+      e.stopPropagation();
       const id = this.dataset.vid;
       window.open('https://www.youtube.com/watch?v='+id, '_blank', 'noopener');
     });
+
     grid.appendChild(card);
   });
 }
