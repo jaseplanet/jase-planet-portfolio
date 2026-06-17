@@ -146,6 +146,11 @@
     </div>
 
     <form id="contact-form" class="reveal">
+      <!-- CAMPOS OCULTOS PARA CONTROL DE CHIPS POR FORM -->
+      <input type="hidden" name="characters" id="hidden-characters" value="-">
+      <input type="hidden" name="style" id="hidden-style" value="-">
+      <input type="hidden" name="duration" id="hidden-duration" value="-">
+
       <div class="row2">
         <div class="field"><label class="mono" data-i18n="f_name">Nombre</label><input type="text" name="name" required></div>
         <div class="field"><label class="mono" data-i18n="f_country">País</label><input type="text" name="country"></div>
@@ -330,7 +335,7 @@ function ytThumbFallback(img){
     img.src = FALLBACK_THUMB;
   }
 }
-// Also catch the "gray placeholder" case where maxres returns a 120x90 image
+
 document.addEventListener('load', function(e){
   const img = e.target;
   if(img.tagName === 'IMG' && img.dataset && img.dataset.yt && img.dataset.step === '0'){
@@ -425,6 +430,11 @@ document.querySelectorAll('.chips').forEach(group=>{
     if(!e.target.classList.contains('chip')) return;
     group.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
     e.target.classList.add('selected');
+    
+    // ASIGNAR VALOR SELECCIONADO AL INPUT OCULTO PARA FORMSUBMIT
+    const groupName = group.getAttribute('data-group');
+    const hiddenInput = document.getElementById(`hidden-${groupName}`);
+    if(hiddenInput) hiddenInput.value = e.target.textContent.trim();
   });
 });
 
@@ -433,23 +443,19 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
   const f = e.target;
   const submitBtn = f.querySelector('button.submit');
   const get = n => (f.querySelector(`[name="${n}"]`)?.value || '').trim() || '-';
-  const sel = g => {
-    const el = document.querySelector(`[data-group="${g}"] .chip.selected`);
-    return el ? el.textContent.trim() : '-';
-  };
   const payload = {
     name: get('name'),
     country: get('country'),
     email: get('email'),
-    characters: sel('characters'),
-    style: sel('style'),
-    duration: sel('duration'),
+    characters: get('characters'),
+    style: get('style'),
+    duration: get('duration'),
     idea: get('idea'),
     _subject: 'New project inquiry — ' + get('name'),
     _template: 'table',
     _captcha: 'false'
   };
-  // Show inline status message
+
   let status = document.getElementById('form-status');
   if(!status){
     status = document.createElement('div');
@@ -477,6 +483,10 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
     status.textContent = I18N[currentLang].form_success;
     f.reset();
     document.querySelectorAll('.chip.selected').forEach(c=>c.classList.remove('selected'));
+    // Resetear inputs ocultos
+    document.getElementById('hidden-characters').value = '-';
+    document.getElementById('hidden-style').value = '-';
+    document.getElementById('hidden-duration').value = '-';
   } catch(err){
     console.error('[contact-form] send failed', err);
     status.style.background='rgba(239,68,68,0.12)';
@@ -626,9 +636,7 @@ let baseY = 0;
 
 const loader = new GLTFLoader();
 const GLB_PATH = 'alex2.glb';
-console.log('[alex2.glb] Attempting to load from:', new URL(GLB_PATH, document.baseURI).href);
 
-// Subtle floor shadow
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 key.castShadow = true;
@@ -647,13 +655,10 @@ shadowFloor.receiveShadow = true;
 scene.add(shadowFloor);
 
 loader.load(GLB_PATH, gltf => {
-  console.log('[alex2.glb] Model loaded successfully');
   scene.remove(placeholder);
   placeholder.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose && o.material.dispose(); });
   model = gltf.scene;
 
-  const materialSet = new Set();
-  const textureSet = new Set();
   model.traverse(child => {
     if (child.isMesh) {
       child.frustumCulled = false;
@@ -662,17 +667,13 @@ loader.load(GLB_PATH, gltf => {
       const mats = Array.isArray(child.material) ? child.material : [child.material];
       mats.forEach(mat => {
         if(!mat) return;
-        materialSet.add(mat);
-        // Preserve embedded materials/textures; only normalize color space and enable alpha
         ['map','emissiveMap','normalMap','roughnessMap','metalnessMap','aoMap','alphaMap'].forEach(slot=>{
           const tex = mat[slot];
           if(tex){
-            textureSet.add(tex);
             if(slot==='map' || slot==='emissiveMap') tex.colorSpace = THREE.SRGBColorSpace;
             tex.needsUpdate = true;
           }
         });
-        // Honor PNG alpha for facial features
         if(mat.map && mat.map.image){
           mat.transparent = true;
           mat.alphaTest = mat.alphaTest || 0.5;
@@ -687,33 +688,23 @@ loader.load(GLB_PATH, gltf => {
       });
     }
   });
-  console.log('[alex2.glb] Material count:', materialSet.size);
-  console.log('[alex2.glb] Texture count:', textureSet.size);
 
-  // Frame: center horizontally, sit on floor, scale to fit ~70% of viewer height
   const box = new THREE.Box3().setFromObject(model);
   const size = box.getSize(new THREE.Vector3());
-  const center = box.getCenter(new THREE.Vector3());
-
-  // Desired world height of the character ~ 2.0 units (camera fov 35°, dist 3.2 -> visible ~2.0)
   const targetHeight = 2.0;
   const scale = targetHeight / Math.max(size.y, 0.0001);
   model.scale.setScalar(scale);
 
-  // Recompute box after scaling
   const box2 = new THREE.Box3().setFromObject(model);
   const c2 = box2.getCenter(new THREE.Vector3());
   const s2 = box2.getSize(new THREE.Vector3());
-  // Move so feet are at y=0 and centered on X/Z
   model.position.x -= c2.x;
   model.position.z -= c2.z;
   model.position.y -= box2.min.y;
 
-  // Position floor and camera to frame the character (head-to-feet, 70% viewport)
   shadowFloor.position.y = 0;
   const charHeight = s2.y;
   const fov = camera.fov * Math.PI/180;
-  // Want char to take ~70% of viewport height -> visible height = charHeight/0.7
   const dist = (charHeight/0.7) / (2*Math.tan(fov/2));
   camera.position.set(0, charHeight*0.55, dist + 0.2);
   camera.lookAt(0, charHeight*0.5, 0);
@@ -723,10 +714,6 @@ loader.load(GLB_PATH, gltf => {
 
   baseY = model.position.y;
   scene.add(model);
-}, (xhr) => {
-  if(xhr.lengthComputable) console.log(`[alex2.glb] ${(xhr.loaded/xhr.total*100).toFixed(0)}%`);
-}, (err) => {
-  console.error('[alex2.glb] Loading error:', err && (err.message || err));
 });
 
 const target = {x:0,y:0};
