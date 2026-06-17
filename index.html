@@ -31,12 +31,22 @@
   .lang button:hover:not(.active){color:#fff;border-color:rgba(255,255,255,0.3)}
   main{position:relative;z-index:2;padding:140px 36px 80px;max-width:1400px;margin:0 auto}
   .layout{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start}
-  #about{margin-bottom:120px;max-width:760px}
-  #about .mono{margin-bottom:24px;color:var(--accent)}
-  #about h1{font-size:clamp(2.4rem,5vw,4rem);margin-bottom:36px}
-  #about p{font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:640px}
-  #works h2{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:8px}
-  #works .mono{margin-bottom:40px;color:var(--accent)}
+  
+  /* Nuevos estilos del embudo */
+  #hero{margin-bottom:100px;max-width:760px}
+  #hero .mono{margin-bottom:24px;color:var(--accent)}
+  #hero h1{font-size:clamp(2.4rem,5vw,4.2rem);margin-bottom:24px}
+  #hero p{font-size:1.15rem;color:rgba(255,255,255,0.85);max-width:640px;margin-bottom:36px}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#fff;border:none;padding:14px 32px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.12em;font-size:0.75rem;transition:all .25s;text-decoration:none;display:inline-block}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(120,19,39,0.7)}
+  .btn-secondary{background:transparent;color:#fff;border:1px solid var(--border);padding:14px 32px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.12em;font-size:0.75rem;transition:all .25s;text-decoration:none;display:inline-block}
+  .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.05)}
+  
+  #works, #services, #process, #about {margin-bottom:120px}
+  section h2{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:8px}
+  section .mono-kicker{margin-bottom:40px;color:var(--accent);display:block}
+  
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:default;transition:all .35s cubic-bezier(.2,.7,.2,1)}
   .thumb{aspect-ratio:16/9;border-radius:8px;background:#000;position:relative;overflow:hidden;margin-bottom:14px;display:block;cursor:pointer}
@@ -51,12 +61,25 @@
   .card p{font-size:0.85rem;color:var(--muted)}
   .card:hover{border-color:var(--accent);transform:translateY(-4px) scale(1.015);box-shadow:0 20px 40px -20px rgba(120,19,39,0.4)}
   .view-yt-btn:hover {border-color:var(--accent) !important;color:#fff !important;background:rgba(120,19,39,0.1) !important;}
+  
+  /* Nuevos estilos para tarjetas estáticas de servicios y procesos */
+  .services-grid, .process-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .service-card, .process-card {background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:32px 24px;transition:all .3s ease}
+  .service-card:hover{border-color:var(--accent)}
+  .service-card h3, .process-card h3{font-size:1.4rem;margin-bottom:12px}
+  .service-card p, .process-card p{font-size:0.9rem;color:var(--muted)}
+  .process-card {position:relative;border-left:3px solid var(--accent)}
+  .process-step {position:absolute;top:15px;right:20px;font-size:2rem;font-family:'Fraunces',serif;color:rgba(120,19,39,0.25);font-style:italic}
+  
+  #about-text-p {font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:680px}
+
   aside.viewer{position:sticky;top:120px;width:380px;height:600px;min-height:600px;display:flex;align-items:center;justify-content:center;background:transparent}
   #three-canvas{width:100%;height:100%;min-width:380px;min-height:600px;display:block}
   .viewer-label{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);white-space:nowrap}
+  
   footer{position:relative;z-index:2;margin-top:120px;padding:80px 36px 30px;border-top:1px solid var(--border);background:rgba(10,11,11,0.6)}
   .footer-inner{max-width:1100px;margin:0 auto}
-  .footer-hero.reveal{text-align:center;margin-bottom:60px}
+  .footer-hero text-align:center;margin-bottom:60px}
   .footer-hero h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:18px}
   .footer-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1rem}
   form{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
@@ -78,16 +101,17 @@
   .ig:hover{color:var(--accent)}
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease}
   .reveal.in{opacity:1;transform:none}
+  
   @media (max-width:1024px){
     .layout{grid-template-columns:1fr;gap:40px}
     aside.viewer{position:relative;top:0;width:100%;max-width:380px;margin:0 auto;height:480px}
-    .grid{grid-template-columns:repeat(2,1fr)}
+    .grid, .services-grid, .process-grid{grid-template-columns:repeat(2,1fr)}
   }
   @media (max-width:640px){
     header.site-header{padding:14px 18px}
     nav.center{display:none}
     main{padding:120px 18px 60px}
-    .grid{grid-template-columns:1fr}
+    .grid, .services-grid, .process-grid{grid-template-columns:1fr}
     .row2{grid-template-columns:1fr}
     .footer-bottom{grid-template-columns:1fr;text-align:center}
     .footer-bottom .right{text-align:center}
@@ -101,12 +125,13 @@
 <canvas id="particles-canvas"></canvas>
 
 <header class="site-header">
-  <button class="logo" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+  <button class="logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">
     <img class="logo-mark" src="FYP2.png" alt="Jase Planet">
     <span class="logo-text">jaseplanet</span>
   </button>
   <nav class="center">
-    <button class="nav-btn" data-i18n="nav_works" onclick="document.getElementById('main').scrollIntoView({behavior:'smooth'})">Trabajos</button>
+    <button class="nav-btn" data-i18n="nav_works" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">Trabajos</button>
+    <button class="nav-btn" data-i18n="nav_services" style="margin-left:8px" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Servicios</button>
     <button class="nav-btn" data-i18n="nav_contact" style="margin-left:8px" onclick="document.getElementById('footer').scrollIntoView({behavior:'smooth'})">Contacto</button>
   </nav>
   <div class="lang">
@@ -118,22 +143,78 @@
 <main id="main">
   <div class="layout">
     <div>
-      <section id="about" class="reveal">
-        <div class="mono" data-i18n="about_kicker">Estudio · Buenos Aires</div>
-        <h1 data-i18n="about_title">¿Qué es Jase Planet?</h1>
-        <p data-i18n="about_text">Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual. Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.</p>
+      <!-- 1. HERO SECTION -->
+      <section id="hero" class="reveal">
+        <div class="mono" data-i18n="hero_kicker">Creative 3D Studio · Buenos Aires</div>
+        <h1 data-i18n="hero_title">Tu música no solo se escucha. Se vive.</h1>
+        <p data-i18n="hero_text">Creamos universos 3D y animaciones cinematográficas hiperrealistas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.</p>
+        <div class="hero-ctas">
+          <button class="btn-primary" data-i18n="hero_cta_primary" onclick="document.getElementById('footer').scrollIntoView({behavior:'smooth'})">Iniciar Proyecto</button>
+          <button class="btn-secondary" data-i18n="hero_cta_secondary" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">Ver Trabajos</button>
+        </div>
       </section>
 
+      <!-- 2. PORTFOLIO SECTION -->
       <section id="works" class="reveal">
-        <div class="mono" data-i18n="works_kicker">Selección · 2024 — 2026</div>
-        <h2 data-i18n="works_title">Trabajos</h2>
+        <span class="mono mono-kicker" data-i18n="works_kicker">Selección · 2024 — 2026</span>
+        <h2 data-i18n="works_title">Proyectos Destacados</h2>
         <div class="grid" id="works-grid"></div>
+      </section>
+
+      <!-- 3. SERVICES SECTION -->
+      <section id="services" class="reveal">
+        <span class="mono mono-kicker" data-i18n="services_kicker">Soluciones visuales</span>
+        <h2 data-i18n="services_title">Servicios de Alto Impacto</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <h3 data-i18n="srv_1_title">Music Visualizers</h3>
+            <p data-i18n="srv_1_desc">Transformamos lanzamientos musicales en experiencias estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.</p>
+          </div>
+          <div class="service-card">
+            <h3 data-i18n="srv_2_title">Character Design</h3>
+            <p data-i18n="srv_2_desc">Diseño de avatares icónicos, personajes con estéticas Cyberpunk o estilizadas y assets virtuales con identidad propia desde cero.</p>
+          </div>
+          <div class="service-card">
+            <h3 data-i18n="srv_3_title">Contenido de Marca</h3>
+            <p data-i18n="srv_3_desc">Teasers, intros y transiciones dinámicas en 3D para creadores y marcas que buscan romper la retención tradicional en redes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PROCESS SECTION -->
+      <section id="process" class="reveal">
+        <span class="mono mono-kicker" data-i18n="process_kicker">Flujo de trabajo</span>
+        <h2 data-i18n="process_title">Cómo Trabajamos</h2>
+        <div class="process-grid">
+          <div class="process-card">
+            <span class="process-step">01</span>
+            <h3 data-i18n="prc_1_title">Briefing</h3>
+            <p data-i18n="prc_1_desc">Analizamos tu visión musical o la identidad de tu marca para armar un moodboard y concepto estético sólido.</p>
+          </div>
+          <div class="process-card">
+            <span class="process-step">02</span>
+            <h3 data-i18n="prc_2_title">Desarrollo 3D</h3>
+            <p data-i18n="prc_2_desc">Modelado, texturizado, iluminación cinematográfica y animación cuadro por cuadro usando software de vanguardia.</p>
+          </div>
+          <div class="process-card">
+            <span class="process-step">03</span>
+            <h3 data-i18n="prc_3_title">Post y Entrega</h3>
+            <p data-i18n="prc_3_desc">Corrección de color, VFX finales y exportación en formatos listos para explotar tus plataformas de distribución.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ABOUT SECTION -->
+      <section id="about" class="reveal">
+        <span class="mono mono-kicker" data-i18n="about_kicker">El Director · Agustín Muñoz</span>
+        <h2 data-i18n="about_title">Detrás de Jase Planet</h2>
+        <p id="about-text-p" data-i18n="about_text">Soy el fundador y artista principal de Jase Planet. No solo muevo polígonos en Blender; traduzco ritmos, emociones y narrativas complejas en piezas digitales de alta retención. Con un flujo optimizado, cubro desde el diseño de mundos hasta guiones de obras originales como 'Love Between Worlds', asegurando que cada proyecto se sienta único y memorable.</p>
       </section>
     </div>
 
     <aside class="viewer">
       <canvas id="three-canvas"></canvas>
-      <span class="mono viewer-label" data-i18n="viewer_label">Alex · Modelo 3D</span>
+      <span class="mono viewer-label" data-i18n="viewer_label">Alex · 3D Model</span>
     </aside>
   </div>
 </main>
@@ -141,23 +222,21 @@
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-hero reveal">
-      <h2 data-i18n="cta_title">¿Tenés un proyecto en mente?</h2>
-      <p data-i18n="cta_sub">Estoy listo para ayudarte a convertir tu idea en una experiencia visual única. Completá el formulario y conversemos sobre tu proyecto.</p>
+      <h2 data-i18n="cta_title">¿Listo para crear un universo visual propio?</h2>
+      <p data-i18n="cta_sub">Completá el formulario detallando tu idea y nos ponemos en marcha. Respondo en menos de 24 horas.</p>
     </div>
 
-    <form id="contact-form" class="reveal" action="https://formsubmit.co/submit/imjaseplanet@gmail.com" method="POST">
+    <form id="contact-form" class="reveal">
+      <!-- CAMPOS OCULTOS REQUERIDOS PARA CHIPS DE FORMSUBMIT -->
+      <input type="hidden" name="characters" id="hidden-characters" value="-">
+      <input type="hidden" name="style" id="hidden-style" value="-">
+      <input type="hidden" name="duration" id="hidden-duration" value="-">
+
       <div class="row2">
         <div class="field"><label class="mono" data-i18n="f_name">Nombre</label><input type="text" name="name" required></div>
         <div class="field"><label class="mono" data-i18n="f_country">País</label><input type="text" name="country"></div>
       </div>
-      <div class="field"><label class="mono" data-i18n="f_email">Email (opcional)</label><input type="email" name="email"></div>
-
-      <input type="hidden" name="personajes" id="hidden-characters" value="-">
-      <input type="hidden" name="estilo" id="hidden-style" value="-">
-      <input type="hidden" name="duracion" id="hidden-duration" value="-">
-      
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
+      <div class="field"><label class="mono" data-i18n="f_email">Email</label><input type="email" name="email" required></div>
 
       <div class="field">
         <label class="mono" data-i18n="f_characters">Personajes</label>
@@ -196,12 +275,12 @@
         <textarea name="idea" data-i18n-ph="ph_idea" placeholder="Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc."></textarea>
       </div>
 
-      <button type="submit" class="submit" data-i18n="f_send">Enviar</button>
+      <button type="submit" class="submit" data-i18n="f_send">Enviar Consulta</button>
     </form>
 
     <div class="footer-bottom">
       <div class="left">
-        <button class="logo" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <button class="logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">
           <img class="logo-mark" src="FYP2.png" alt="Jase Planet">
           <span class="logo-text">jaseplanet</span>
         </button>
@@ -230,54 +309,141 @@
 <script>
 const I18N = {
   es:{
-    nav_works:"Trabajos",nav_contact:"Contacto",form_success:"¡Mensaje enviado! Te responderé pronto.",
+    nav_works:"Trabajos",
+    nav_services:"Servicios",
+    nav_contact:"Contacto",
+    form_success:"¡Mensaje enviado! Te responderé pronto.",
     form_error:"No se pudo enviar el mensaje. Probá de nuevo o escribime a imjaseplanet@gmail.com",
-    about_kicker:"Estudio · Buenos Aires",about_title:"¿Qué es Jase Planet?",
-    about_text:"Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual. Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.",
-    works_kicker:"Selección · 2024 — 2026",works_title:"Trabajos",viewer_label:"Alex · Modelo 3D",
-    cta_title:"¿Tenés un proyecto en mente?",cta_sub:"Estoy listo para ayudarte a convertir tu idea en una experiencia visual única. Completá el formulario y conversemos sobre tu proyecto.",
-    f_name:"Nombre",f_country:"País",f_email:"Email (opcional)",f_characters:"Personajes",ch_one:"Un personaje",ch_many:"Más de uno",ch_none:"Ninguno",
-    f_style:"Estilo",st_real:"Realista",st_cr:"Cartoon Realista",st_other:"Otro estilo",f_duration:"Duración",du_loop:"Loop 15-30 seg",du_1m:"1 Minuto",du_song:"Una Canción",du_other:"Otra Duración",
+    hero_kicker:"Creative 3D Studio · Buenos Aires",
+    hero_title:"Tu música no solo se escucha. Se vive.",
+    hero_text:"Creamos universos 3D y animaciones cinematográficas hiperrealistas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.",
+    hero_cta_primary:"Iniciar Proyecto",
+    hero_cta_secondary:"Ver Trabajos",
+    works_kicker:"Selección · 2024 — 2026",
+    works_title:"Proyectos Destacados",
+    services_kicker:"Soluciones visuales",
+    services_title:"Servicios de Alto Impacto",
+    srv_1_title:"Music Visualizers",
+    srv_1_desc:"Transformamos lanzamientos musicales en experiencias estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.",
+    srv_2_title:"Character Design",
+    srv_2_desc:"Diseño de avatares icónicos, personajes con estéticas Cyberpunk o estilizadas y assets virtuales con identidad propia desde cero.",
+    srv_3_title:"Contenido de Marca",
+    srv_3_desc:"Teasers, intros y transiciones dinámicas en 3D para creadores y marcas que buscan romper la retención tradicional en redes.",
+    process_kicker:"Flujo de trabajo",
+    process_title:"Cómo Trabajamos",
+    prc_1_title:"01 · Briefing",
+    prc_1_desc:"Analizamos tu visión musical o la identidad de tu marca para armar un moodboard y concepto estético sólido.",
+    prc_2_title:"02 · Desarrollo 3D",
+    prc_2_desc:"Modelado, texturizado, iluminación cinematográfica y animación cuadro por cuadro usando software de vanguardia.",
+    prc_3_title:"03 · Post y Entrega",
+    prc_3_desc:"Corrección de color, VFX finales y exportación en formatos listos para explotar tus plataformas de distribución.",
+    about_kicker:"El Director · Agustín Muñoz",
+    about_title:"Detrás de Jase Planet",
+    about_text:"Soy el fundador y artista principal de Jase Planet. No solo muevo polígonos en Blender; traduzco ritmos, emociones y narrativas complejas en piezas digitales de alta retención. Con un flujo optimizado, cubro desde el diseño de mundos hasta guiones de una obra original como 'Love Between Worlds', asegurando que cada proyecto se sienta único y memorable.",
+    viewer_label:"Alex · Modelo 3D",
+    cta_title:"¿Listo para crear un universo visual propio?",
+    cta_sub:"Completá el formulario detallando tu idea y nos ponemos en marcha. Respondo en menos de 24 horas.",
+    f_name:"Nombre",f_country:"País",f_email:"Email",
+    f_characters:"Personajes",ch_one:"Un personaje",ch_many:"Más de uno",ch_none:"Ninguno",
+    f_style:"Estilo",st_real:"Realista",st_cr:"Cartoon Realista",st_other:"Otro estilo",
+    f_duration:"Duración",du_loop:"Loop 15-30 seg",du_1m:"1 Minuto",du_song:"Una Canción",du_other:"Otra Duración",
     f_idea:"Tu idea",ph_idea:"Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc.",
-    f_send:"Enviar",rights:"Todos los derechos reservados",roles:"3D Generalist · Director Creativo · Guionista",view_on_yt:"Ver en YouTube",
-    proj1_title:"TADC Fanart Ponmi",proj1_desc:"Animación 3D · Blender · Cinematic",
-    proj2_title:"Hice a mi novia estilo Cyberpunk",proj2_desc:"Animación 3D · Daz3D · Character Design",
-    proj3_title:"Trippy Visual",proj3_desc:"Animación 3D · Blender",
-    proj4_title:"Drift Karting",proj4_desc:"Animación 3D · Blender · After Effects · Loop Animation",
-    proj5_title:"Don't Drink Monster at 5:55 AM",proj5_desc:"Animación 3D · Blender · After Effects · Cortometraje",
-    proj6_title:"Takin' a Ride Along la Panamericana",proj6_desc:"Animación 3D · Blender · After Effects · Cinematic",
-    proj7_title:"Run Test Animation",proj7_desc:"Animación 3D · Blender · Character Animation",
-    proj8_title:"DJ Cat",proj8_desc:"Animación 3D · Blender · Character Animation",
-    proj9_title:"Blender Girl Smokin'",proj9_desc:"Animación 3D · Character Design · Blender",
-    proj10_title:"Porrote",proj10_desc:"Animación 3D · Character Design"
+    f_send:"Enviar Consulta",
+    rights:"Todos los derechos reservados",
+    roles:"3D Generalist · Director Creativo · Guionista",
+    project_desc:"Animación 3D · Dirección creativa",
+    view_on_yt:"Ver en YouTube",
+    proj1_title:"TADC Fanart Ponmi",
+    proj1_desc:"Animación 3D · Blender · Cinematic",
+    proj2_title:"Hice a mi novia estilo Cyberpunk",
+    proj2_desc:"Animación 3D · Daz3D · Character Design",
+    proj3_title:"Trippy Visual",
+    proj3_desc:"Animación 3D · Blender",
+    proj4_title:"Drift Karting",
+    proj4_desc:"Animación 3D · Blender · After Effects · Loop Animation",
+    proj5_title:"Don't Drink Monster at 5:55 AM",
+    proj5_desc:"Animación 3D · Blender · After Effects · Cortometraje",
+    proj6_title:"Takin' a Ride Along la Panamericana",
+    proj6_desc:"Animación 3D · Blender · After Effects · Cinematic",
+    proj7_title:"Run Test Animation",
+    proj7_desc:"Animación 3D · Blender · Character Animation",
+    proj8_title:"DJ Cat",
+    proj8_desc:"Animación 3D · Blender · Character Animation",
+    proj9_title:"Blender Girl Smokin'",
+    proj9_desc:"Animación 3D · Character Design · Blender",
+    proj10_title:"Porrote",
+    proj10_desc:"Animación 3D · Character Design"
   },
   en:{
-    nav_works:"Works",nav_contact:"Contact",form_success:"Message sent! I'll get back to you soon.",
+    nav_works:"Works",
+    nav_services:"Services",
+    nav_contact:"Contact",
+    form_success:"Message sent! I'll get back to you soon.",
     form_error:"Couldn't send the message. Try again or email imjaseplanet@gmail.com",
-    about_kicker:"Studio · Buenos Aires",about_title:"What is Jase Planet?",
-    about_text:"I'm Agustín Muñoz, founder of Jase Planet, a creative studio specialized in 3D animation and visual content. With over 3 years of experience, I work with Blender 5, Daz3D, After Effects and Premiere Pro to develop projects with unique identity and high visual impact. I'm currently finishing the screenplay for 'Love Between Worlds', an original work reflecting my focus on creating stories, characters and universes. Based in Buenos Aires, Argentina, available 24/7 for projects, collaborations and commissions. My goal is to transform ideas into visual gems that generate impact and connect with their audience.",
-    works_kicker:"Selected · 2024 — 2026",works_title:"Works",viewer_label:"Alex · 3D Model",
-    cta_title:"Got a project in mind?",cta_sub:"I'm ready to help you turn your idea into a unique visual experience. Fill out the form and let's talk about your project.",
-    f_name:"Name",f_country:"Country",f_email:"Email (optional)",f_characters:"Characters",ch_one:"One character",ch_many:"More than one",ch_none:"None",
-    f_style:"Style",st_real:"Realistic",st_cr:"Cartoon Realistic",st_other:"Other style",f_duration:"Duration",du_loop:"Loop 15-30 sec",du_1m:"1 Minute",du_song:"A Song",du_other:"Other Duration",
+    hero_kicker:"Creative 3D Studio · Buenos Aires",
+    hero_title:"Your music shouldn't just be heard. It must be lived.",
+    hero_text:"We design 3D universes and hyper-realistic cinematic animations for artists and brands who refuse to settle for ordinary and demand massive visual impact.",
+    hero_cta_primary:"Start Project",
+    hero_cta_secondary:"View Works",
+    works_kicker:"Selected · 2024 — 2026",
+    works_title:"Featured Projects",
+    services_kicker:"Visual Solutions",
+    services_title:"High-Impact Services",
+    srv_1_title:"Music Visualizers",
+    srv_1_desc:"We transform musical releases into hypnotic aesthetic experiences optimized for YouTube, Spotify, and live show screens.",
+    srv_2_title:"Character Design",
+    srv_2_desc:"Design of iconic avatars, characters with Cyberpunk or highly stylized aesthetics, and virtual assets with their own identity from scratch.",
+    srv_3_title:"Brand Content",
+    srv_3_desc:"Teasers, intros, and dynamic 3D transitions for creators and brands looking to break through traditional audience retention on social media.",
+    process_kicker:"Workflow",
+    process_title:"How We Work",
+    prc_1_title:"01 · Briefing",
+    prc_1_desc:"We analyze your musical vision or brand identity to put together a solid moodboard and aesthetic concept.",
+    prc_2_title:"02 · 3D Development",
+    prc_2_desc:"Modeling, texturing, cinematic lighting, and frame-by-frame animation using cutting-edge industry software.",
+    prc_3_title:"03 · Post & Delivery",
+    prc_3_desc:"Color grading, final VFX, and exporting in formats ready to explode across your distribution platforms.",
+    about_kicker:"The Director · Agustín Muñoz",
+    about_title:"Behind Jase Planet",
+    about_text:"I'm the founder and lead artist of Jase Planet. I don't just move polygons in Blender; I translate rhythms, emotions, and complex narratives into high-retention digital pieces. With an optimized workflow, I handle everything from world design to screenwriting for original works like 'Love Between Worlds', ensuring every project feels unique and unforgettable.",
+    viewer_label:"Alex · 3D Model",
+    cta_title:"Ready to create your own visual universe?",
+    cta_sub:"Fill out the form detailing your idea and let's get moving. I reply in less than 24 hours.",
+    f_name:"Name",f_country:"Country",f_email:"Email",
+    f_characters:"Characters",ch_one:"One character",ch_many:"More than one",ch_none:"None",
+    f_style:"Style",st_real:"Realistic",st_cr:"Cartoon Realistic",st_other:"Other style",
+    f_duration:"Duration",du_loop:"Loop 15-30 sec",du_1m:"1 Minute",du_song:"A Song",du_other:"Other Duration",
     f_idea:"Your idea",ph_idea:"Briefly tell me what you have in mind: references, mood, etc.",
-    f_send:"Send",rights:"All rights reserved",roles:"3D Generalist · Creative Director · Screenwriter",view_on_yt:"Watch on YouTube",
-    proj1_title:"TADC Fanart Ponmi",proj1_desc:"3D Animation · Blender · Cinematic",
-    proj2_title:"I Made My Girlfriend in Cyberpunk Style",proj2_desc:"3D Animation · Daz3D · Character Design",
-    proj3_title:"Trippy Visual",proj3_desc:"3D Animation · Blender",
-    proj4_title:"Drift Karting",proj4_desc:"3D Animation · Blender · After Effects · Loop Animation",
-    proj5_title:"Don't Drink Monster at 5:55 AM",proj5_desc:"3D Animation · Blender · After Effects · Short Film",
-    proj6_title:"Takin' a Ride Along la Panamericana",proj6_desc:"3D Animation · Blender · After Effects · Cinematic",
-    proj7_title:"Run Test Animation",proj7_desc:"3D Animation · Blender · Character Animation",
-    proj8_title:"DJ Cat",proj8_desc:"3D Animation · Blender · Character Animation",
-    proj9_title:"Blender Girl Smokin'",proj9_desc:"3D Animation · Character Design · Blender",
-    proj10_title:"Porrote",proj10_desc:"3D Animation · Character Design"
+    f_send:"Send Inquiry",
+    rights:"All rights reserved",
+    roles:"3D Generalist · Creative Director · Screenwriter",
+    project_desc:"3D animation · Creative direction",
+    view_on_yt:"Watch on YouTube",
+    proj1_title:"TADC Fanart Ponmi",
+    proj1_desc:"3D Animation · Blender · Cinematic",
+    proj2_title:"I Made My Girlfriend in Cyberpunk Style",
+    proj2_desc:"3D Animation · Daz3D · Character Design",
+    proj3_title:"Trippy Visual",
+    proj3_desc:"3D Animation · Blender",
+    proj4_title:"Drift Karting",
+    proj4_desc:"3D Animation · Blender · After Effects · Loop Animation",
+    proj5_title:"Don't Drink Monster at 5:55 AM",
+    proj5_desc:"3D Animation · Blender · After Effects · Short Film",
+    proj6_title:"Takin' a Ride Along la Panamericana",
+    proj6_desc:"3D Animation · Blender · After Effects · Cinematic",
+    proj7_title:"Run Test Animation",
+    proj7_desc:"3D Animation · Blender · Character Animation",
+    proj8_title:"DJ Cat",
+    proj8_desc:"3D Animation · Blender · Character Animation",
+    proj9_title:"Blender Girl Smokin'",
+    proj9_desc:"3D Animation · Character Design · Blender",
+    proj10_title:"Porrote",
+    proj10_desc:"3D Animation · Character Design"
   }
 };
 
 let currentLang = 'es';
 const FALLBACK_THUMB = "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 360'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#1a1c1c'/><stop offset='1' stop-color='#781327'/></linearGradient></defs><rect width='640' height='360' fill='url(%23g)'/><text x='50%' y='52%' text-anchor='middle' font-family='Georgia, serif' font-style='italic' font-size='34' fill='rgba(255,255,255,0.85)'>jaseplanet</text><text x='50%' y='66%' text-anchor='middle' font-family='monospace' font-size='14' letter-spacing='4' fill='rgba(255,255,255,0.55)'>VIDEO</text></svg>`);
-
 function ytThumbFallback(img){
   const id = img.dataset.yt;
   let step = parseInt(img.dataset.step||'0',10) + 1;
@@ -294,7 +460,6 @@ function ytThumbFallback(img){
     img.src = FALLBACK_THUMB;
   }
 }
-
 document.addEventListener('load', function(e){
   const img = e.target;
   if(img.tagName === 'IMG' && img.dataset && img.dataset.yt && img.dataset.step === '0'){
@@ -320,21 +485,24 @@ function applyLang(lang){
   });
   renderWorks();
 }
-
 document.querySelectorAll('.lang button').forEach(b=>{
   b.addEventListener('click',()=>applyLang(b.dataset.lang));
 });
 
 function renderWorks(){
   const grid = document.getElementById('works-grid');
-  if(!grid) return;
   grid.innerHTML='';
   const projects = [
-    {id:'kLdnWVa7J3c', key:'proj1'},{id:'-kIodrXcUa0', key:'proj2'},
-    {id:'eb92mjlCmJs', key:'proj3'},{id:'63Nk0YEsBO4', key:'proj4'},
-    {id:'hqdb-EE3VY8', key:'proj5'},{id:'dn5nxnufIWg', key:'proj6'},
-    {id:'G75JR2hcvdA', key:'proj7'},{id:'d1KmZGBYO3s', key:'proj8'},
-    {id:'_BVathekpOk', key:'proj9'},{id:'U-Mcd-r2CWc', key:'proj10'}
+    {id:'kLdnWVa7J3c', key:'proj1'},
+    {id:'-kIodrXcUa0', key:'proj2'},
+    {id:'eb92mjlCmJs', key:'proj3'},
+    {id:'63Nk0YEsBO4', key:'proj4'},
+    {id:'hqdb-EE3VY8', key:'proj5'},
+    {id:'dn5nxnufIWg', key:'proj6'},
+    {id:'G75JR2hcvdA', key:'proj7'},
+    {id:'d1KmZGBYO3s', key:'proj8'},
+    {id:'_BVathekpOk', key:'proj9'},
+    {id:'U-Mcd-r2CWc', key:'proj10'}
   ];
   projects.forEach(p => {
     const card = document.createElement('div');
@@ -381,45 +549,94 @@ renderWorks();
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// MANEJO MEJORADO DE CHIPS CON PREVENCIÓN DE ACCIONES INCORRECTAS
 document.querySelectorAll('.chips').forEach(group=>{
   group.addEventListener('click',e=>{
-    if(!e.target.classList.contains('chip')) return;
+    const chip = e.target.closest('.chip');
+    if(!chip) return;
+    e.preventDefault(); // Evita cualquier trigger raro en formularios
     group.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
-    e.target.classList.add('selected');
+    chip.classList.add('selected');
   });
 });
 
-document.getElementById('contact-form').addEventListener('submit', function(e) {
+// ENVÍO PROCESANDO LOS INPUTS OCULTOS DE LOS CHIPS SELECCIONADOS
+document.getElementById('contact-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f = e.target;
+  const submitBtn = f.querySelector('button.submit');
+  
+  const get = n => (f.querySelector(`[name="${n}"]`)?.value || '').trim() || '-';
+  
+  // Función para capturar dinámicamente el chip seleccionado
   const sel = g => {
     const el = document.querySelector(`[data-group="${g}"] .chip.selected`);
     return el ? el.textContent.trim() : '-';
   };
+
+  // Mapeamos a los inputs ocultos por si acaso, pero armamos directamente el JSON Payload
   document.getElementById('hidden-characters').value = sel('characters');
   document.getElementById('hidden-style').value = sel('style');
   document.getElementById('hidden-duration').value = sel('duration');
-});
 
-// CONFIGURACIÓN MEJORADA Y ULTRA SEGURA DEL INTERSECTION OBSERVER
-const io = new IntersectionObserver(es=>{
-  es.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-    }
-  });
-},{threshold:0.01}); // Umbral mínimo para evitar bloqueos en cargas rápidas o pantallas chicas
+  const payload = {
+    name: get('name'),
+    country: get('country'),
+    email: get('email'),
+    characters: sel('characters'),
+    style: sel('style'),
+    duration: sel('duration'),
+    idea: get('idea'),
+    _subject: 'New project inquiry — ' + get('name'),
+    _template: 'table',
+    _captcha: 'false'
+  };
 
-document.querySelectorAll('.reveal').forEach(el=>{
-  io.observe(el);
-  // Forzar activación inmediata si el elemento ya está dentro del campo visual inicial
-  const r = el.getBoundingClientRect();
-  if(r.top >= 0 && r.top <= window.innerHeight){
-    el.classList.add('in');
+  let status = document.getElementById('form-status');
+  if(!status){
+    status = document.createElement('div');
+    status.id = 'form-status';
+    status.className = 'mono';
+    status.style.cssText = 'margin-top:14px;padding:12px 16px;border-radius:10px;text-align:center';
+    f.appendChild(status);
+  }
+  status.style.display='block';
+  status.style.background='rgba(255,255,255,0.05)';
+  status.style.color='var(--muted)';
+  status.textContent = currentLang==='es' ? 'Enviando...' : 'Sending...';
+  
+  const oldLabel = submitBtn.textContent;
+  submitBtn.disabled = true;
+
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/imjaseplanet@gmail.com', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(()=>({}));
+    if(!res.ok || data.success === 'false') throw new Error(data.message || 'send failed');
+    status.style.background='rgba(34,197,94,0.12)';
+    status.style.color='#86efac';
+    status.textContent = I18N[currentLang].form_success;
+    f.reset();
+    document.querySelectorAll('.chip.selected').forEach(c=>c.classList.remove('selected'));
+  } catch(err){
+    console.error('[contact-form] send failed', err);
+    status.style.background='rgba(239,68,68,0.12)';
+    status.style.color='#fca5a5';
+    status.textContent = I18N[currentLang].form_error;
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = oldLabel;
   }
 });
 
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
 (function(){
   const cv = document.getElementById('particles-canvas');
-  if(!cv) return;
   const ctx = cv.getContext('2d');
   let W,H,particles=[];
   const mouse = {x:-9999,y:-9999,active:false,mode:'hover'};
@@ -498,162 +715,159 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const canvas = document.getElementById('three-canvas');
-if(canvas){
-  const scene = new THREE.Scene();
-  const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.4;
+const scene = new THREE.Scene();
+const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.4;
 
-  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-  camera.position.set(0,1.4,3.2);
-  camera.lookAt(0,1.2,0);
+const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+camera.position.set(0,1.4,3.2);
+camera.lookAt(0,1.2,0);
 
-  const W = 420, H = 640;
-  renderer.setSize(W, H, false);
-  canvas.style.width = W + 'px';
-  canvas.style.height = H + 'px';
-  camera.aspect = W / H;
+const W = 420, H = 640;
+renderer.setSize(W, H, false);
+canvas.style.width = W + 'px';
+canvas.style.height = H + 'px';
+camera.aspect = W / H;
+camera.updateProjectionMatrix();
+
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+const envTexture = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environment = envTexture;
+
+function sizeCanvas(){
+  const r = canvas.getBoundingClientRect();
+  const w = r.width || 380;
+  const h = r.height || 600;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+
+const key = new THREE.DirectionalLight(0xffffff, 2.5);
+key.position.set(2,3,3); scene.add(key);
+const rim = new THREE.DirectionalLight(0x22d3ee, 1.2);
+rim.position.set(-3,2,-2); scene.add(rim);
+const fill = new THREE.DirectionalLight(0x781327, 0.9);
+fill.position.set(-1,1,3); scene.add(fill);
+scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+
+sizeCanvas();
+setTimeout(sizeCanvas, 200);
+addEventListener('resize',sizeCanvas);
+
+const placeholder = new THREE.Group();
+const head = new THREE.Mesh(new THREE.SphereGeometry(0.45,32,32), new THREE.MeshStandardMaterial({color:0xeeeeee,roughness:0.45,metalness:0.1}));
+head.position.y=1.55;
+const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.35,0.8,8,16), new THREE.MeshStandardMaterial({color:0x222426,roughness:0.6}));
+body.position.y=0.85;
+placeholder.add(head); placeholder.add(body);
+scene.add(placeholder);
+let model = placeholder;
+let baseY = 0;
+
+const loader = new GLTFLoader();
+const GLB_PATH = 'alex2.glb';
+
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+key.castShadow = true;
+key.shadow.mapSize.set(1024,1024);
+key.shadow.camera.near = 0.1;
+key.shadow.camera.far = 20;
+key.shadow.camera.left = -3; key.shadow.camera.right = 3;
+key.shadow.camera.top = 3; key.shadow.camera.bottom = -3;
+key.shadow.bias = -0.0005;
+const shadowFloor = new THREE.Mesh(
+  new THREE.PlaneGeometry(6,6),
+  new THREE.ShadowMaterial({opacity:0.35})
+);
+shadowFloor.rotation.x = -Math.PI/2;
+shadowFloor.receiveShadow = true;
+scene.add(shadowFloor);
+
+loader.load(GLB_PATH, gltf => {
+  scene.remove(placeholder);
+  placeholder.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose && o.material.dispose(); });
+  model = gltf.scene;
+
+  model.traverse(child => {
+    if (child.isMesh) {
+      child.frustumCulled = false;
+      child.castShadow = true;
+      child.receiveShadow = false;
+      const mats = Array.isArray(child.material) ? child.material : [child.material];
+      mats.forEach(mat => {
+        if(!mat) return;
+        ['map','emissiveMap','normalMap','roughnessMap','metalnessMap','aoMap','alphaMap'].forEach(slot=>{
+          const tex = mat[slot];
+          if(tex){
+            if(slot==='map' || slot==='emissiveMap') tex.colorSpace = THREE.SRGBColorSpace;
+            tex.needsUpdate = true;
+          }
+        });
+        if(mat.map && mat.map.image){
+          mat.transparent = true;
+          mat.alphaTest = mat.alphaTest || 0.5;
+          mat.side = THREE.DoubleSide;
+        }
+        if(mat.alphaMap){ mat.transparent = true; }
+        if(child.geometry && child.geometry.attributes && child.geometry.attributes.color){
+          mat.vertexColors = true;
+        }
+        mat.envMapIntensity = 1.0;
+        mat.needsUpdate = true;
+      });
+    }
+  });
+
+  const box = new THREE.Box3().setFromObject(model);
+  const size = box.getSize(new THREE.Vector3());
+  const targetHeight = 2.0;
+  const scale = targetHeight / Math.max(size.y, 0.0001);
+  model.scale.setScalar(scale);
+
+  const box2 = new THREE.Box3().setFromObject(model);
+  const c2 = box2.getCenter(new THREE.Vector3());
+  const s2 = box2.getSize(new THREE.Vector3());
+  model.position.x -= c2.x;
+  model.position.z -= c2.z;
+  model.position.y -= box2.min.y;
+
+  shadowFloor.position.y = 0;
+  const charHeight = s2.y;
+  const fov = camera.fov * Math.PI/180;
+  const dist = (charHeight/0.7) / (2*Math.tan(fov/2));
+  camera.position.set(0, charHeight*0.55, dist + 0.2);
+  camera.lookAt(0, charHeight*0.5, 0);
   camera.updateProjectionMatrix();
 
-  const pmremGenerator = new THREE.PMREMGenerator(renderer);
-  const envTexture = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environment = envTexture;
+  baseY = model.position.y;
+  scene.add(model);
+});
 
-  function sizeCanvas(){
-    const r = canvas.getBoundingClientRect();
-    const w = r.width || 380;
-    const h = r.height || 600;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
+const target = {x:0,y:0};
+addEventListener('pointermove',e=>{
+  const nx = (e.clientX/innerWidth)*2-1;
+  const ny = (e.clientY/innerHeight)*2-1;
+  target.y = nx * (Math.PI/2);
+  target.x = ny * 0.35;
+});
+
+const start = performance.now();
+function loop(){
+  const t = (performance.now()-start)/1000;
+  if(model){
+    model.rotation.y += (target.y - model.rotation.y)*0.08;
+    model.rotation.x += (target.x - model.rotation.x)*0.08;
+    model.position.y = baseY + Math.sin(t*1.4)*0.04;
   }
-
-  const key = new THREE.DirectionalLight(0xffffff, 2.5);
-  key.position.set(2,3,3); scene.add(key);
-  const rim = new THREE.DirectionalLight(0x22d3ee, 1.2);
-  rim.position.set(-3,2,-2); scene.add(rim);
-  const fill = new THREE.DirectionalLight(0x781327, 0.9);
-  fill.position.set(-1,1,3); scene.add(fill);
-  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-
-  sizeCanvas();
-  setTimeout(sizeCanvas, 200);
-  addEventListener('resize',sizeCanvas);
-
-  const placeholder = new THREE.Group();
-  const head = new THREE.Mesh(new THREE.SphereGeometry(0.45,32,32), new THREE.MeshStandardMaterial({color:0xeeeeee,roughness:0.45,metalness:0.1}));
-  head.position.y=1.55;
-  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.35,0.8,8,16), new THREE.MeshStandardMaterial({color:0x222426,roughness:0.6}));
-  body.position.y=0.85;
-  placeholder.add(head); placeholder.add(body);
-  scene.add(placeholder);
-  let model = placeholder;
-  let baseY = 0;
-
-  const loader = new GLTFLoader();
-  const GLB_PATH = 'alex2.glb';
-
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  key.castShadow = true;
-  key.shadow.mapSize.set(1024,1024);
-  key.shadow.camera.near = 0.1;
-  key.shadow.camera.far = 20;
-  key.shadow.bias = -0.0005;
-
-  const shadowFloor = new THREE.Mesh(
-    new THREE.PlaneGeometry(6,6),
-    new THREE.ShadowMaterial({opacity:0.35})
-  );
-  shadowFloor.rotation.x = -Math.PI/2;
-  shadowFloor.receiveShadow = true;
-  scene.add(shadowFloor);
-
-  loader.load(GLB_PATH, gltf => {
-    scene.remove(placeholder);
-    placeholder.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose && o.material.dispose(); });
-    model = gltf.scene;
-
-    model.traverse(child => {
-      if (child.isMesh) {
-        child.frustumCulled = false;
-        child.castShadow = true;
-        child.receiveShadow = false;
-        const mats = Array.isArray(child.material) ? child.material : [child.material];
-        mats.forEach(mat => {
-          if(!mat) return;
-          ['map','emissiveMap','normalMap','roughnessMap','metalnessMap','aoMap','alphaMap'].forEach(slot=>{
-            const tex = mat[slot];
-            if(tex){
-              if(slot==='map' || slot==='emissiveMap') tex.colorSpace = THREE.SRGBColorSpace;
-              tex.needsUpdate = true;
-            }
-          });
-          if(mat.map && mat.map.image){
-            mat.transparent = true;
-            mat.alphaTest = mat.alphaTest || 0.5;
-            mat.side = THREE.DoubleSide;
-          }
-          if(mat.alphaMap){ mat.transparent = true; }
-          if(child.geometry && child.geometry.attributes && child.geometry.attributes.color){
-            mat.vertexColors = true;
-          }
-          mat.envMapIntensity = 1.0;
-          mat.needsUpdate = true;
-        });
-      }
-    });
-
-    const box = new THREE.Box3().setFromObject(model);
-    const size = box.getSize(new THREE.Vector3());
-    const targetHeight = 2.0;
-    const scale = targetHeight / Math.max(size.y, 0.0001);
-    model.scale.setScalar(scale);
-
-    const box2 = new THREE.Box3().setFromObject(model);
-    const c2 = box2.getCenter(new THREE.Vector3());
-    const s2 = box2.getSize(new THREE.Vector3());
-    model.position.x -= c2.x;
-    model.position.z -= c2.z;
-    model.position.y -= box2.min.y;
-
-    shadowFloor.position.y = 0;
-    const charHeight = s2.y;
-    const fov = camera.fov * Math.PI/180;
-    const dist = (charHeight/0.7) / (2*Math.tan(fov/2));
-    camera.position.set(0, charHeight*0.55, dist + 0.2);
-    camera.lookAt(0, charHeight*0.5, 0);
-    camera.updateProjectionMatrix();
-
-    baseY = model.position.y;
-    scene.add(model);
-  }, undefined, err => {
-    console.error(err);
-  });
-
-  const target = {x:0,y:0};
-  addEventListener('pointermove',e=>{
-    const nx = (e.clientX/innerWidth)*2-1;
-    const ny = (e.clientY/innerHeight)*2-1;
-    target.y = nx * (Math.PI/2);
-    target.x = ny * 0.35;
-  });
-
-  const start = performance.now();
-  function loop(){
-    const t = (performance.now()-start)/1000;
-    if(model){
-      model.rotation.y += (target.y - model.rotation.y)*0.08;
-      model.rotation.x += (target.x - model.rotation.x)*0.08;
-      model.position.y = baseY + Math.sin(t*1.4)*0.04;
-    }
-    renderer.render(scene,camera);
-    requestAnimationFrame(loop);
-  }
-  loop();
+  renderer.render(scene,camera);
+  requestAnimationFrame(loop);
 }
+loop();
 </script>
 </body>
 </html>
