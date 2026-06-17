@@ -31,12 +31,22 @@
   .lang button:hover:not(.active){color:#fff;border-color:rgba(255,255,255,0.3)}
   main{position:relative;z-index:2;padding:140px 36px 80px;max-width:1400px;margin:0 auto}
   .layout{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start}
-  #about{margin-bottom:120px;max-width:760px}
-  #about .mono{margin-bottom:24px;color:var(--accent)}
-  #about h1{font-size:clamp(2.4rem,5vw,4rem);margin-bottom:36px}
-  #about p{font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:640px}
-  #works h2{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:8px}
-  #works .mono{margin-bottom:40px;color:var(--accent)}
+  
+  /* Nuevos estilos del embudo */
+  #hero{margin-bottom:100px;max-width:760px}
+  #hero .mono{margin-bottom:24px;color:var(--accent)}
+  #hero h1{font-size:clamp(2.4rem,5vw,4.2rem);margin-bottom:24px}
+  #hero p{font-size:1.15rem;color:rgba(255,255,255,0.85);max-width:640px;margin-bottom:36px}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary{background:var(--accent);color:#fff;border:none;padding:14px 32px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.12em;font-size:0.75rem;transition:all .25s;text-decoration:none;display:inline-block}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(120,19,39,0.7)}
+  .btn-secondary{background:transparent;color:#fff;border:1px solid var(--border);padding:14px 32px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.12em;font-size:0.75rem;transition:all .25s;text-decoration:none;display:inline-block}
+  .btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,0.05)}
+  
+  #works, #services, #process, #about {margin-bottom:120px}
+  section h2{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:8px}
+  section .mono-kicker{margin-bottom:40px;color:var(--accent);display:block}
+  
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .card{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:default;transition:all .35s cubic-bezier(.2,.7,.2,1)}
   .thumb{aspect-ratio:16/9;border-radius:8px;background:#000;position:relative;overflow:hidden;margin-bottom:14px;display:block;cursor:pointer}
@@ -51,12 +61,25 @@
   .card p{font-size:0.85rem;color:var(--muted)}
   .card:hover{border-color:var(--accent);transform:translateY(-4px) scale(1.015);box-shadow:0 20px 40px -20px rgba(120,19,39,0.4)}
   .view-yt-btn:hover {border-color:var(--accent) !important;color:#fff !important;background:rgba(120,19,39,0.1) !important;}
+  
+  /* Nuevos estilos para tarjetas estáticas de servicios y procesos */
+  .services-grid, .process-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .service-card, .process-card {background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:32px 24px;transition:all .3s ease}
+  .service-card:hover{border-color:var(--accent)}
+  .service-card h3, .process-card h3{font-size:1.4rem;margin-bottom:12px}
+  .service-card p, .process-card p{font-size:0.9rem;color:var(--muted)}
+  .process-card {position:relative;border-left:3px solid var(--accent)}
+  .process-step {position:absolute;top:15px;right:20px;font-size:2rem;font-family:'Fraunces',serif;color:rgba(120,19,39,0.25);font-style:italic}
+  
+  #about-text-p {font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:680px}
+
   aside.viewer{position:sticky;top:120px;width:380px;height:600px;min-height:600px;display:flex;align-items:center;justify-content:center;background:transparent}
   #three-canvas{width:100%;height:100%;min-width:380px;min-height:600px;display:block}
   .viewer-label{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);white-space:nowrap}
+  
   footer{position:relative;z-index:2;margin-top:120px;padding:80px 36px 30px;border-top:1px solid var(--border);background:rgba(10,11,11,0.6)}
   .footer-inner{max-width:1100px;margin:0 auto}
-  .footer-hero reveal{text-align:center;margin-bottom:60px}
+  .footer-hero{text-align:center;margin-bottom:60px}
   .footer-hero h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:18px}
   .footer-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1rem}
   form{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
@@ -78,16 +101,17 @@
   .ig:hover{color:var(--accent)}
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease}
   .reveal.in{opacity:1;transform:none}
+  
   @media (max-width:1024px){
     .layout{grid-template-columns:1fr;gap:40px}
     aside.viewer{position:relative;top:0;width:100%;max-width:380px;margin:0 auto;height:480px}
-    .grid{grid-template-columns:repeat(2,1fr)}
+    .grid, .services-grid, .process-grid{grid-template-columns:repeat(2,1fr)}
   }
   @media (max-width:640px){
     header.site-header{padding:14px 18px}
     nav.center{display:none}
     main{padding:120px 18px 60px}
-    .grid{grid-template-columns:1fr}
+    .grid, .services-grid, .process-grid{grid-template-columns:1fr}
     .row2{grid-template-columns:1fr}
     .footer-bottom{grid-template-columns:1fr;text-align:center}
     .footer-bottom .right{text-align:center}
@@ -101,12 +125,13 @@
 <canvas id="particles-canvas"></canvas>
 
 <header class="site-header">
-  <button class="logo" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+  <button class="logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">
     <img class="logo-mark" src="FYP2.png" alt="Jase Planet">
     <span class="logo-text">jaseplanet</span>
   </button>
   <nav class="center">
-    <button class="nav-btn" data-i18n="nav_works" onclick="document.getElementById('main').scrollIntoView({behavior:'smooth'})">Trabajos</button>
+    <button class="nav-btn" data-i18n="nav_works" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">Trabajos</button>
+    <button class="nav-btn" data-i18n="nav_services" style="margin-left:8px" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Servicios</button>
     <button class="nav-btn" data-i18n="nav_contact" style="margin-left:8px" onclick="document.getElementById('footer').scrollIntoView({behavior:'smooth'})">Contacto</button>
   </nav>
   <div class="lang">
@@ -118,19 +143,76 @@
 <main id="main">
   <div class="layout">
     <div>
-      <section id="about" class="reveal">
-        <div class="mono" data-i18n="about_kicker">Estudio · Buenos Aires</div>
-        <h1 data-i18n="about_title">¿Qué es Jase Planet?</h1>
-        <p data-i18n="about_text">Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual. Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.</p>
+      <!-- 1. HERO SECTION: El Gancho orientado al cliente -->
+      <section id="hero" class="reveal">
+        <div class="mono" data-i18n="hero_kicker">Creative 3D Studio · Buenos Aires</div>
+        <h1 data-i18n="hero_title">Tu música no solo se escucha. Se vive.</h1>
+        <p data-i18n="hero_text">Creamos universos 3D y animaciones cinematográficas hiperrealistas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.</p>
+        <div class="hero-ctas">
+          <button class="btn-primary" data-i18n="hero_cta_primary" onclick="document.getElementById('footer').scrollIntoView({behavior:'smooth'})">Iniciar Proyecto</button>
+          <button class="btn-secondary" data-i18n="hero_cta_secondary" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">Ver Trabajos</button>
+        </div>
       </section>
 
+      <!-- 2. PORTFOLIO SECTION: Prueba visual inmediata -->
       <section id="works" class="reveal">
-        <div class="mono" data-i18n="works_kicker">Selección · 2024 — 2026</div>
-        <h2 data-i18n="works_title">Trabajos</h2>
+        <span class="mono mono-kicker" data-i18n="works_kicker">Selección · 2024 — 2026</span>
+        <h2 data-i18n="works_title">Proyectos Destacados</h2>
         <div class="grid" id="works-grid"></div>
+      </section>
+
+      <!-- 3. SERVICES SECTION: Eleva el nivel de conciencia de tus servicios -->
+      <section id="services" class="reveal">
+        <span class="mono mono-kicker" data-i18n="services_kicker">Soluciones visuales</span>
+        <h2 data-i18n="services_title">Servicios de Alto Impacto</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <h3 data-i18n="srv_1_title">Music Visualizers</h3>
+            <p data-i18n="srv_1_desc">Transformamos lanzamientos musicales en experiencias estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.</p>
+          </div>
+          <div class="service-card">
+            <h3 data-i18n="srv_2_title">Character Design</h3>
+            <p data-i18n="srv_2_desc">Diseño de avatares icónicos, personajes con estéticas Cyberpunk o estilizadas y assets virtuales con identidad propia desde cero.</p>
+          </div>
+          <div class="service-card">
+            <h3 data-i18n="srv_3_title">Contenido de Marca</h3>
+            <p data-i18n="srv_3_desc">Teasers, intros y transiciones dinámicas en 3D para creadores y marcas que buscan romper la retención tradicional en redes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PROCESS SECTION: Elimina fricciones y miedos -->
+      <section id="process" class="reveal">
+        <span class="mono mono-kicker" data-i18n="process_kicker">Flujo de trabajo</span>
+        <h2 data-i18n="process_title">Cómo Trabajamos</h2>
+        <div class="process-grid">
+          <div class="process-card">
+            <span class="process-step">01</span>
+            <h3 data-i18n="prc_1_title">Briefing</h3>
+            <p data-i18n="prc_1_desc">Analizamos tu visión musical o la identidad de tu marca para armar un moodboard y concepto estético sólido.</p>
+          </div>
+          <div class="process-card">
+            <span class="process-step">02</span>
+            <h3 data-i18n="prc_2_title">Desarrollo 3D</h3>
+            <p data-i18n="prc_2_desc">Modelado, texturizado, iluminación cinematográfica y animación cuadro por cuadro usando software de vanguardia.</p>
+          </div>
+          <div class="process-card">
+            <span class="process-step">03</span>
+            <h3 data-i18n="prc_3_title">Post y Entrega</h3>
+            <p data-i18n="prc_3_desc">Corrección de color, VFX finales y exportación en formatos listos para explotar tus plataformas de distribución.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ABOUT SECTION: Tu marca personal como respaldo de autoridad -->
+      <section id="about" class="reveal">
+        <span class="mono mono-kicker" data-i18n="about_kicker">El Director · Agustín Muñoz</span>
+        <h2 data-i18n="about_title">Detrás de Jase Planet</h2>
+        <p id="about-text-p" data-i18n="about_text">Soy el fundador y artista principal de Jase Planet. No solo muevo polígonos en Blender; traduzco ritmos, emociones y narrativas complejas en piezas digitales de alta retención. Con un flujo optimizado, cubro desde el diseño de mundos hasta guiones de obras originales como 'Love Between Worlds', asegurando que cada proyecto se sienta único y memorable.</p>
       </section>
     </div>
 
+    <!-- El canvas del modelo 3D te sigue acompañando estratégicamente al costado -->
     <aside class="viewer">
       <canvas id="three-canvas"></canvas>
       <span class="mono viewer-label" data-i18n="viewer_label">Alex · 3D Model</span>
@@ -141,21 +223,17 @@
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-hero reveal">
-      <h2 data-i18n="cta_title">¿Tenés un proyecto en mente?</h2>
-      <p data-i18n="cta_sub">Estoy listo para ayudarte a convertir tu idea en una experiencia visual única. Completá el formulario y conversemos sobre tu proyecto.</p>
+      <h2 data-i18n="cta_title">¿Listo para crear un universo visual propio?</h2>
+      <p data-i18n="cta_sub">Completá el formulario detallando tu idea y nos ponemos en marcha. Respondo en menos de 24 horas.</p>
     </div>
 
     <form id="contact-form" class="reveal">
-      <!-- CAMPOS OCULTOS PARA CONTROL DE CHIPS POR FORM -->
-      <input type="hidden" name="characters" id="hidden-characters" value="-">
-      <input type="hidden" name="style" id="hidden-style" value="-">
-      <input type="hidden" name="duration" id="hidden-duration" value="-">
-
       <div class="row2">
         <div class="field"><label class="mono" data-i18n="f_name">Nombre</label><input type="text" name="name" required></div>
         <div class="field"><label class="mono" data-i18n="f_country">País</label><input type="text" name="country"></div>
       </div>
-      <div class="field"><label class="mono" data-i18n="f_email">Email (opcional)</label><input type="email" name="email"></div>
+      <!-- Cambiado a Requerido para captar leads reales de ads de Meta -->
+      <div class="field"><label class="mono" data-i18n="f_email">Email</label><input type="email" name="email" required></div>
 
       <div class="field">
         <label class="mono" data-i18n="f_characters">Personajes</label>
@@ -194,12 +272,12 @@
         <textarea name="idea" data-i18n-ph="ph_idea" placeholder="Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc."></textarea>
       </div>
 
-      <button type="submit" class="submit" data-i18n="f_send">Enviar</button>
+      <button type="submit" class="submit" data-i18n="f_send">Enviar Consulta</button>
     </form>
 
     <div class="footer-bottom">
       <div class="left">
-        <button class="logo" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <button class="logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">
           <img class="logo-mark" src="FYP2.png" alt="Jase Planet">
           <span class="logo-text">jaseplanet</span>
         </button>
@@ -229,23 +307,45 @@
 const I18N = {
   es:{
     nav_works:"Trabajos",
+    nav_services:"Servicios",
     nav_contact:"Contacto",
     form_success:"¡Mensaje enviado! Te responderé pronto.",
     form_error:"No se pudo enviar el mensaje. Probá de nuevo o escribime a imjaseplanet@gmail.com",
-    about_kicker:"Estudio · Buenos Aires",
-    about_title:"¿Qué es Jase Planet?",
-    about_text:"Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual. Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.",
+    hero_kicker:"Creative 3D Studio · Buenos Aires",
+    hero_title:"Tu música no solo se escucha. Se vive.",
+    hero_text:"Creamos universos 3D y animaciones cinematográficas hiperrealistas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.",
+    hero_cta_primary:"Iniciar Proyecto",
+    hero_cta_secondary:"Ver Trabajos",
     works_kicker:"Selección · 2024 — 2026",
-    works_title:"Trabajos",
+    works_title:"Proyectos Destacados",
+    services_kicker:"Soluciones visuales",
+    services_title:"Servicios de Alto Impacto",
+    srv_1_title:"Music Visualizers",
+    srv_1_desc:"Transformamos lanzamientos musicales en experiencias estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.",
+    srv_2_title:"Character Design",
+    srv_2_desc:"Diseño de avatares icónicos, personajes con estéticas Cyberpunk o estilizadas y assets virtuales con identidad propia desde cero.",
+    srv_3_title:"Contenido de Marca",
+    srv_3_desc:"Teasers, intros y transiciones dinámicas en 3D para creadores y marcas que buscan romper la retención tradicional en redes.",
+    process_kicker:"Flujo de trabajo",
+    process_title:"Cómo Trabajamos",
+    prc_1_title:"01 · Briefing",
+    prc_1_desc:"Analizamos tu visión musical o la identidad de tu marca para armar un moodboard y concepto estético sólido.",
+    prc_2_title:"02 · Desarrollo 3D",
+    prc_2_desc:"Modelado, texturizado, iluminación cinematográfica y animación cuadro por cuadro usando software de vanguardia.",
+    prc_3_title:"03 · Post y Entrega",
+    prc_3_desc:"Corrección de color, VFX finales y exportación en formatos listos para explotar tus plataformas de distribución.",
+    about_kicker:"El Director · Agustín Muñoz",
+    about_title:"Detrás de Jase Planet",
+    about_text:"Soy el fundador y artista principal de Jase Planet. No solo muevo polígonos en Blender; traduzco ritmos, emociones y narrativas complejas en piezas digitales de alta retención. Con un flujo optimizado, cubro desde el diseño de mundos hasta guiones de una obra original como 'Love Between Worlds', asegurando que cada proyecto se sienta único y memorable.",
     viewer_label:"Alex · Modelo 3D",
-    cta_title:"¿Tenés un proyecto en mente?",
-    cta_sub:"Estoy listo para ayudarte a convertir tu idea en una experiencia visual única. Completá el formulario y conversemos sobre tu proyecto.",
-    f_name:"Nombre",f_country:"País",f_email:"Email (opcional)",
+    cta_title:"¿Listo para crear un universo visual propio?",
+    cta_sub:"Completá el formulario detallando tu idea y nos ponemos en marcha. Respondo en menos de 24 horas.",
+    f_name:"Nombre",f_country:"País",f_email:"Email",
     f_characters:"Personajes",ch_one:"Un personaje",ch_many:"Más de uno",ch_none:"Ninguno",
     f_style:"Estilo",st_real:"Realista",st_cr:"Cartoon Realista",st_other:"Otro estilo",
     f_duration:"Duración",du_loop:"Loop 15-30 seg",du_1m:"1 Minuto",du_song:"Una Canción",du_other:"Otra Duración",
     f_idea:"Tu idea",ph_idea:"Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc.",
-    f_send:"Enviar",
+    f_send:"Enviar Consulta",
     rights:"Todos los derechos reservados",
     roles:"3D Generalist · Director Creativo · Guionista",
     project_desc:"Animación 3D · Dirección creativa",
@@ -273,23 +373,45 @@ const I18N = {
   },
   en:{
     nav_works:"Works",
+    nav_services:"Services",
     nav_contact:"Contact",
     form_success:"Message sent! I'll get back to you soon.",
     form_error:"Couldn't send the message. Try again or email imjaseplanet@gmail.com",
-    about_kicker:"Studio · Buenos Aires",
-    about_title:"What is Jase Planet?",
-    about_text:"I'm Agustín Muñoz, founder of Jase Planet, a creative studio specialized in 3D animation and visual content. With over 3 years of experience, I work with Blender 5, Daz3D, After Effects and Premiere Pro to develop projects with unique identity and high visual impact. I'm currently finishing the screenplay for 'Love Between Worlds', an original work reflecting my focus on creating stories, characters and universes. Based in Buenos Aires, Argentina, available 24/7 for projects, collaborations and commissions. My goal is to transform ideas into visual gems that generate impact and connect with their audience.",
+    hero_kicker:"Creative 3D Studio · Buenos Aires",
+    hero_title:"Your music shouldn't just be heard. It must be lived.",
+    hero_text:"We design 3D universes and hyper-realistic cinematic animations for artists and brands who refuse to settle for ordinary and demand massive visual impact.",
+    hero_cta_primary:"Start Project",
+    hero_cta_secondary:"View Works",
     works_kicker:"Selected · 2024 — 2026",
-    works_title:"Works",
+    works_title:"Featured Projects",
+    services_kicker:"Visual Solutions",
+    services_title:"High-Impact Services",
+    srv_1_title:"Music Visualizers",
+    srv_1_desc:"We transform musical releases into hypnotic aesthetic experiences optimized for YouTube, Spotify, and live show screens.",
+    srv_2_title:"Character Design",
+    srv_2_desc:"Design of iconic avatars, characters with Cyberpunk or highly stylized aesthetics, and virtual assets with their own identity from scratch.",
+    srv_3_title:"Brand Content",
+    srv_3_desc:"Teasers, intros, and dynamic 3D transitions for creators and brands looking to break through traditional audience retention on social media.",
+    process_kicker:"Workflow",
+    process_title:"How We Work",
+    prc_1_title:"01 · Briefing",
+    prc_1_desc:"We analyze your musical vision or brand identity to put together a solid moodboard and aesthetic concept.",
+    prc_2_title:"02 · 3D Development",
+    prc_2_desc:"Modeling, texturing, cinematic lighting, and frame-by-frame animation using cutting-edge industry software.",
+    prc_3_title:"03 · Post & Delivery",
+    prc_3_desc:"Color grading, final VFX, and exporting in formats ready to explode across your distribution platforms.",
+    about_kicker:"The Director · Agustín Muñoz",
+    about_title:"Behind Jase Planet",
+    about_text:"I'm the founder and lead artist of Jase Planet. I don't just move polygons in Blender; I translate rhythms, emotions, and complex narratives into high-retention digital pieces. With an optimized workflow, I handle everything from world design to screenwriting for original works like 'Love Between Worlds', ensuring every project feels unique and unforgettable.",
     viewer_label:"Alex · 3D Model",
-    cta_title:"Got a project in mind?",
-    cta_sub:"I'm ready to help you turn your idea into a unique visual experience. Fill out the form and let's talk about your project.",
-    f_name:"Name",f_country:"Country",f_email:"Email (optional)",
+    cta_title:"Ready to create your own visual universe?",
+    cta_sub:"Fill out the form detailing your idea and let's get moving. I reply in less than 24 hours.",
+    f_name:"Name",f_country:"Country",f_email:"Email",
     f_characters:"Characters",ch_one:"One character",ch_many:"More than one",ch_none:"None",
     f_style:"Style",st_real:"Realistic",st_cr:"Cartoon Realistic",st_other:"Other style",
     f_duration:"Duration",du_loop:"Loop 15-30 sec",du_1m:"1 Minute",du_song:"A Song",du_other:"Other Duration",
     f_idea:"Your idea",ph_idea:"Briefly tell me what you have in mind: references, mood, etc.",
-    f_send:"Send",
+    f_send:"Send Inquiry",
     rights:"All rights reserved",
     roles:"3D Generalist · Creative Director · Screenwriter",
     project_desc:"3D animation · Creative direction",
@@ -335,7 +457,6 @@ function ytThumbFallback(img){
     img.src = FALLBACK_THUMB;
   }
 }
-
 document.addEventListener('load', function(e){
   const img = e.target;
   if(img.tagName === 'IMG' && img.dataset && img.dataset.yt && img.dataset.step === '0'){
@@ -430,11 +551,6 @@ document.querySelectorAll('.chips').forEach(group=>{
     if(!e.target.classList.contains('chip')) return;
     group.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
     e.target.classList.add('selected');
-    
-    // ASIGNAR VALOR SELECCIONADO AL INPUT OCULTO PARA FORMSUBMIT
-    const groupName = group.getAttribute('data-group');
-    const hiddenInput = document.getElementById(`hidden-${groupName}`);
-    if(hiddenInput) hiddenInput.value = e.target.textContent.trim();
   });
 });
 
@@ -443,19 +559,22 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
   const f = e.target;
   const submitBtn = f.querySelector('button.submit');
   const get = n => (f.querySelector(`[name="${n}"]`)?.value || '').trim() || '-';
+  const sel = g => {
+    const el = document.querySelector(`[data-group="${g}"] .chip.selected`);
+    return el ? el.textContent.trim() : '-';
+  };
   const payload = {
     name: get('name'),
     country: get('country'),
     email: get('email'),
-    characters: get('characters'),
-    style: get('style'),
-    duration: get('duration'),
+    characters: sel('characters'),
+    style: sel('style'),
+    duration: sel('duration'),
     idea: get('idea'),
     _subject: 'New project inquiry — ' + get('name'),
     _template: 'table',
     _captcha: 'false'
   };
-
   let status = document.getElementById('form-status');
   if(!status){
     status = document.createElement('div');
@@ -483,10 +602,6 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
     status.textContent = I18N[currentLang].form_success;
     f.reset();
     document.querySelectorAll('.chip.selected').forEach(c=>c.classList.remove('selected'));
-    // Resetear inputs ocultos
-    document.getElementById('hidden-characters').value = '-';
-    document.getElementById('hidden-style').value = '-';
-    document.getElementById('hidden-duration').value = '-';
   } catch(err){
     console.error('[contact-form] send failed', err);
     status.style.background='rgba(239,68,68,0.12)';
@@ -708,8 +823,6 @@ loader.load(GLB_PATH, gltf => {
   const dist = (charHeight/0.7) / (2*Math.tan(fov/2));
   camera.position.set(0, charHeight*0.55, dist + 0.2);
   camera.lookAt(0, charHeight*0.5, 0);
-  camera.near = 0.1;
-  camera.far = Math.max(100, dist*10);
   camera.updateProjectionMatrix();
 
   baseY = model.position.y;
