@@ -52,7 +52,6 @@
   .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
   .thumb:hover img{transform:scale(1.04)}
   .thumb .play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.35))}
-  .thumb .play span{width:62px;height:62px;border-radius:50%;background:rgba(120,19,39,0.92);display:grid;place-items:center;box-shadow:0 8px 24px rgba(0,0,0,0.4);transition:transform .25s}
   .thumb:hover .play span{transform:scale(1.1)}
   .thumb .play svg{width:24px;height:24px;fill:#fff;margin-left:3px}
   .thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -80,18 +79,22 @@
   .footer-hero{text-align:center;margin-bottom:60px}
   .footer-hero h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:18px}
   .footer-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1rem}
-  form{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
-  .field label{display:block;margin-bottom:8px}
-  .field input,.field textarea{width:100%;background:var(--bg-2);border:1px solid var(--border);color:var(--fg);padding:14px 16px;border-radius:10px;font-family:'Inter',sans-serif;font-size:0.95rem;font-weight:300;transition:border-color .2s}
+  
+  /* --- ESTILOS DEL FORMULARIO --- */
+  form{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+  .field{display:flex;flex-direction:column}
+  .field label.mono{font-family:'JetBrains Mono',monospace !important;text-transform:uppercase;letter-spacing:0.15em;font-size:0.72rem;color:var(--muted);margin-bottom:8px;display:block}
+  .field input,.field textarea{width:100%;background:var(--bg-2);border:1px solid var(--border);color:var(--fg);padding:12px 16px;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;font-weight:300;transition:border-color .2s}
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
-  .field textarea{min-height:120px;resize:vertical}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{background:transparent;border:1px solid var(--border);color:var(--fg);padding:9px 16px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;transition:all .2s}
-  .chip:hover{border-color:rgba(255,255,255,0.3)}
+  .field textarea{min-height:100px;max-height:250px;resize:vertical}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .chip{background:transparent;border:1px solid var(--border);color:var(--fg);padding:8px 16px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;transition:all .2s}
+  .chip:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.02)}
   .chip.selected{background:var(--accent);border-color:var(--accent);color:#fff}
-  button.submit{align-self:flex-start;background:var(--accent);color:#fff;border:none;padding:14px 38px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.18em;font-size:0.78rem;transition:all .25s}
-  button.submit:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px rgba(120,19,39,0.7)}
+  button.submit{align-self:flex-start;background:var(--accent);color:#fff;border:none;padding:12px 32px;border-radius:999px;cursor:pointer;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.15em;font-size:0.75rem;transition:all .25s;margin-top:10px}
+  button.submit:hover{transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(120,19,39,0.7)}
+  
   .footer-bottom{margin-top:80px;padding-top:30px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
   .footer-bottom .right{text-align:right}
   .footer-bottom small{display:block;color:var(--muted);margin-top:10px;font-size:0.8rem}
@@ -143,7 +146,6 @@
     <div>
       <section id="hero" class="reveal">
         <div class="mono" data-i18n="hero_kicker">Creative 3D Studio · Buenos Aires</div>
-        <!-- Actualizado el H1 por defecto -->
         <h1 data-i18n="hero_title">Dale a tu música la vida visual que se merece.</h1>
         <p data-i18n="hero_text">Creamos universos 3D y animaciones cinematográficas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.</p>
         <div class="hero-ctas">
@@ -202,7 +204,7 @@
       <section id="about" class="reveal">
         <span class="mono mono-kicker" data-i18n="about_kicker">El Director · Agustín Muñoz</span>
         <h2 data-i18n="about_title">¿Qué es Jase Planet?</h2>
-        <p id="about-text-p" data-i18n="about_text">Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual.
+        <p id="about-text-p" data-i18n="about_text">Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D and contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual.
 
 Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.</p>
       </section>
@@ -222,52 +224,53 @@ Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra origin
       <p data-i18n="cta_sub">Completá el formulario detallando tu idea y nos ponemos en marcha. Respondo en menos de 24 horas.</p>
     </div>
 
-    <form id="contact-form" class="reveal">
-      <input type="hidden" name="selected_characters" id="hidden-characters" value="-">
-      <input type="hidden" name="selected_style" id="hidden-style" value="-">
-      <input type="hidden" name="selected_duration" id="hidden-duration" value="-">
+    <!-- MODIFICADO: Formulario nativo conectado directo a FormSubmit -->
+    <form id="contact-form" class="reveal" action="https://formsubmit.co/imjaseplanet@gmail.com" method="POST">
+      <input type="hidden" name="Personajes" id="hidden-characters" value="-">
+      <input type="hidden" name="Estilo" id="hidden-style" value="-">
+      <input type="hidden" name="Duracion" id="hidden-duration" value="-">
 
       <div class="row2">
-        <div class="field"><label class="mono" data-i18n="f_name">Nombre</label><input type="text" name="name" required></div>
-        <div class="field"><label class="mono" data-i18n="f_country">País</label><input type="text" name="country"></div>
+        <div class="field"><label class="mono" data-i18n="f_name">Nombre</label><input type="text" name="Nombre" required></div>
+        <div class="field"><label class="mono" data-i18n="f_country">País</label><input type="text" name="Pais"></div>
       </div>
-      <div class="field"><label class="mono" data-i18n="f_email">Email</label><input type="email" name="_replyto" required></div>
+      <div class="field"><label class="mono" data-i18n="f_email">Email</label><input type="email" name="Email" required></div>
 
       <div class="field">
         <label class="mono" data-i18n="f_characters">Personajes</label>
         <div class="chips" data-group="characters" data-target="hidden-characters">
-          <button type="button" class="chip" data-value="one" data-i18n="ch_one">Un personaje</button>
-          <button type="button" class="chip" data-value="many" data-i18n="ch_many">Más de uno</button>
-          <button type="button" class="chip" data-value="none" data-i18n="ch_none">Ninguno</button>
+          <button type="button" class="chip" data-value="Un personaje" data-i18n="ch_one">Un personaje</button>
+          <button type="button" class="chip" data-value="Mas de uno" data-i18n="ch_many">Más de uno</button>
+          <button type="button" class="chip" data-value="Ninguno" data-i18n="ch_none">Ninguno</button>
         </div>
       </div>
 
       <div class="field">
         <label class="mono" data-i18n="f_style">Estilo</label>
         <div class="chips" data-group="style" data-target="hidden-style">
-          <button type="button" class="chip" data-value="cartoon">Cartoon</button>
-          <button type="button" class="chip" data-value="realista" data-i18n="st_real">Realista</button>
-          <button type="button" class="chip" data-value="cartoon-realista" data-i18n="st_cr">Cartoon Realista</button>
-          <button type="button" class="chip" data-value="lowpoly">Lowpoly</button>
-          <button type="button" class="chip" data-value="ps1">PS1</button>
-          <button type="button" class="chip" data-value="vfx">VFX</button>
-          <button type="button" class="chip" data-value="other" data-i18n="st_other">Otro estilo</button>
+          <button type="button" class="chip" data-value="Cartoon">Cartoon</button>
+          <button type="button" class="chip" data-value="Realista" data-i18n="st_real">Realista</button>
+          <button type="button" class="chip" data-value="Cartoon Realista" data-i18n="st_cr">Cartoon Realista</button>
+          <button type="button" class="chip" data-value="Lowpoly">Lowpoly</button>
+          <button type="button" class="chip" data-value="PS1">PS1</button>
+          <button type="button" class="chip" data-value="VFX">VFX</button>
+          <button type="button" class="chip" data-value="Otro estilo" data-i18n="st_other">Otro estilo</button>
         </div>
       </div>
 
       <div class="field">
         <label class="mono" data-i18n="f_duration">Duración</label>
         <div class="chips" data-group="duration" data-target="hidden-duration">
-          <button type="button" class="chip" data-value="loop" data-i18n="du_loop">Loop 15-30 seg</button>
-          <button type="button" class="chip" data-value="1min" data-i18n="du_1m">1 Minuto</button>
-          <button type="button" class="chip" data-value="song" data-i18n="du_song">Una Canción</button>
-          <button type="button" class="chip" data-value="other" data-i18n="du_other">Otra Duración</button>
+          <button type="button" class="chip" data-value="Loop 15-30 seg" data-i18n="du_loop">Loop 15-30 seg</button>
+          <button type="button" class="chip" data-value="1 Minuto" data-i18n="du_1m">1 Minuto</button>
+          <button type="button" class="chip" data-value="Una Cancion" data-i18n="du_song">Una Canción</button>
+          <button type="button" class="chip" data-value="Otra Duracion" data-i18n="du_other">Otra Duración</button>
         </div>
       </div>
 
       <div class="field">
         <label class="mono" data-i18n="f_idea">Tu idea</label>
-        <textarea name="idea" data-i18n-ph="ph_idea" placeholder="Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc."></textarea>
+        <textarea name="Idea_del_Proyecto" data-i18n-ph="ph_idea" placeholder="Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc."></textarea>
       </div>
 
       <button type="submit" class="submit" data-i18n="f_send">Enviar Consulta</button>
@@ -307,10 +310,7 @@ const I18N = {
     nav_works:"Trabajos",
     nav_services:"Servicios",
     nav_contact:"Contacto",
-    form_success:"¡Mensaje enviado! Te responderé pronto.",
-    form_error:"No se pudo enviar el mensaje. Probá de nuevo o escribime a imjaseplanet@gmail.com",
     hero_kicker:"Creative 3D Studio · Buenos Aires",
-    // Actualizado en la traducción al español
     hero_title:"Dale a tu música la vida visual que se merece.",
     hero_text:"Creamos universos 3D y animaciones cinematográficas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.",
     hero_cta_primary:"Iniciar Proyecto",
@@ -374,10 +374,7 @@ const I18N = {
     nav_works:"Works",
     nav_services:"Services",
     nav_contact:"Contact",
-    form_success:"Message sent! I'll get back to you soon.",
-    form_error:"Couldn't send the message. Try again or email imjaseplanet@gmail.com",
     hero_kicker:"Creative 3D Studio · Buenos Aires",
-    // Frase en inglés adaptada para hacer juego con tu nuevo enfoque directo
     hero_title:"Give your music the visual life it deserves.",
     hero_text:"We design 3D universes and cinematic animations for artists and brands who refuse to settle for ordinary and demand massive visual impact.",
     hero_cta_primary:"Start Project",
@@ -546,6 +543,7 @@ renderWorks();
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* Control y mapeo de los chips interactivos en los campos ocultos */
 document.querySelectorAll('.chips').forEach(group=>{
   group.addEventListener('click',e=>{
     if(!e.target.classList.contains('chip')) return;
@@ -557,67 +555,6 @@ document.querySelectorAll('.chips').forEach(group=>{
       document.getElementById(targetId).value = e.target.getAttribute('data-value') || e.target.textContent.trim();
     }
   });
-});
-
-document.getElementById('contact-form').addEventListener('submit',async e=>{
-  e.preventDefault();
-  const f = e.target;
-  const submitBtn = f.querySelector('button.submit');
-  
-  const payload = {
-    name: (f.querySelector('[name="name"]')?.value || '').trim(),
-    country: (f.querySelector('[name="country"]')?.value || '').trim() || '-',
-    _replyto: (f.querySelector('[name="_replyto"]')?.value || '').trim(),
-    characters: document.getElementById('hidden-characters').value,
-    style: document.getElementById('hidden-style').value,
-    duration: document.getElementById('hidden-duration').value,
-    idea: (f.querySelector('[name="idea"]')?.value || '').trim() || '-',
-    _subject: 'New project inquiry — ' + (f.querySelector('[name="name"]')?.value || ''),
-    _template: 'table',
-    _captcha: 'false'
-  };
-  
-  let status = document.getElementById('form-status');
-  if(!status){
-    status = document.createElement('div');
-    status.id = 'form-status';
-    status.className = 'mono';
-    status.style.cssText = 'margin-top:14px;padding:12px 16px;border-radius:10px;text-align:center';
-    f.appendChild(status);
-  }
-  status.style.display='block';
-  status.style.background='rgba(255,255,255,0.05)';
-  status.style.color='var(--muted)';
-  status.textContent = currentLang==='es' ? 'Enviando...' : 'Sending...';
-  
-  const oldLabel = submitBtn.textContent;
-  submitBtn.disabled = true;
-  
-  try {
-    const res = await fetch('https://formsubmit.co/ajax/imjaseplanet@gmail.com', {
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json().catch(()=>({}));
-    if(!res.ok || data.success === 'false') throw new Error(data.message || 'send failed');
-    status.style.background='rgba(34,197,94,0.12)';
-    status.style.color='#86efac';
-    status.textContent = I18N[currentLang].form_success;
-    f.reset();
-    document.querySelectorAll('.chip.selected').forEach(c=>c.classList.remove('selected'));
-    document.getElementById('hidden-characters').value = '-';
-    document.getElementById('hidden-style').value = '-';
-    document.getElementById('hidden-duration').value = '-';
-  } catch(err){
-    console.error('[contact-form] send failed', err);
-    status.style.background='rgba(239,68,68,0.12)';
-    status.style.color='#fca5a5';
-    status.textContent = I18N[currentLang].form_error;
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = oldLabel;
-  }
 });
 
 const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.12});
