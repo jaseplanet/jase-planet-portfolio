@@ -32,7 +32,6 @@
   main{position:relative;z-index:2;padding:140px 36px 80px;max-width:1400px;margin:0 auto}
   .layout{display:grid;grid-template-columns:1fr 420px;gap:80px;align-items:start}
   
-  /* Nuevos estilos del embudo */
   #hero{margin-bottom:100px;max-width:760px}
   #hero .mono{margin-bottom:24px;color:var(--accent)}
   #hero h1{font-size:clamp(2.4rem,5vw,4.2rem);margin-bottom:24px}
@@ -62,7 +61,6 @@
   .card:hover{border-color:var(--accent);transform:translateY(-4px) scale(1.015);box-shadow:0 20px 40px -20px rgba(120,19,39,0.4)}
   .view-yt-btn:hover {border-color:var(--accent) !important;color:#fff !important;background:rgba(120,19,39,0.1) !important;}
   
-  /* Nuevos estilos para tarjetas estáticas de servicios y procesos */
   .services-grid, .process-grid {display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
   .service-card, .process-card {background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:32px 24px;transition:all .3s ease}
   .service-card:hover{border-color:var(--accent)}
@@ -71,7 +69,7 @@
   .process-card {position:relative;border-left:3px solid var(--accent)}
   .process-step {position:absolute;top:15px;right:20px;font-size:2rem;font-family:'Fraunces',serif;color:rgba(120,19,39,0.25);font-style:italic}
   
-  #about-text-p {font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:680px}
+  #about-text-p {font-size:1.05rem;color:rgba(255,255,255,0.78);max-width:680px;white-space:pre-line}
 
   aside.viewer{position:sticky;top:120px;width:380px;height:600px;min-height:600px;display:flex;align-items:center;justify-content:center;background:transparent}
   #three-canvas{width:100%;height:100%;min-width:380px;min-height:600px;display:block}
@@ -79,7 +77,7 @@
   
   footer{position:relative;z-index:2;margin-top:120px;padding:80px 36px 30px;border-top:1px solid var(--border);background:rgba(10,11,11,0.6)}
   .footer-inner{max-width:1100px;margin:0 auto}
-  .footer-hero text-align:center;margin-bottom:60px}
+  .footer-hero{text-align:center;margin-bottom:60px}
   .footer-hero h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:18px}
   .footer-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1rem}
   form{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
@@ -143,36 +141,33 @@
 <main id="main">
   <div class="layout">
     <div>
-      <!-- 1. HERO SECTION -->
       <section id="hero" class="reveal">
         <div class="mono" data-i18n="hero_kicker">Creative 3D Studio · Buenos Aires</div>
         <h1 data-i18n="hero_title">Tu música no solo se escucha. Se vive.</h1>
-        <p data-i18n="hero_text">Creamos universos 3D y animaciones cinematográficas hiperrealistas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.</p>
+        <p data-i18n="hero_text">Creamos universos 3D y animaciones cinematográficas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.</p>
         <div class="hero-ctas">
           <button class="btn-primary" data-i18n="hero_cta_primary" onclick="document.getElementById('footer').scrollIntoView({behavior:'smooth'})">Iniciar Proyecto</button>
           <button class="btn-secondary" data-i18n="hero_cta_secondary" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">Ver Trabajos</button>
         </div>
       </section>
 
-      <!-- 2. PORTFOLIO SECTION -->
       <section id="works" class="reveal">
         <span class="mono mono-kicker" data-i18n="works_kicker">Selección · 2024 — 2026</span>
         <h2 data-i18n="works_title">Proyectos Destacados</h2>
         <div class="grid" id="works-grid"></div>
       </section>
 
-      <!-- 3. SERVICES SECTION -->
       <section id="services" class="reveal">
         <span class="mono mono-kicker" data-i18n="services_kicker">Soluciones visuales</span>
         <h2 data-i18n="services_title">Servicios de Alto Impacto</h2>
         <div class="services-grid">
           <div class="service-card">
             <h3 data-i18n="srv_1_title">Music Visualizers</h3>
-            <p data-i18n="srv_1_desc">Transformamos lanzamientos musicales en experiencias estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.</p>
+            <p data-i18n="srv_1_desc">Transformamos lanzamientos musicales en joyas unicas para YouTube, Spotify y pantallas de shows en vivo.</p>
           </div>
           <div class="service-card">
             <h3 data-i18n="srv_2_title">Character Design</h3>
-            <p data-i18n="srv_2_desc">Diseño de avatares icónicos, personajes con estéticas Cyberpunk o estilizadas y assets virtuales con identidad propia desde cero.</p>
+            <p data-i18n="srv_2_desc">Diseño de personajes unicos con identidad propia desde 0</p>
           </div>
           <div class="service-card">
             <h3 data-i18n="srv_3_title">Contenido de Marca</h3>
@@ -181,7 +176,6 @@
         </div>
       </section>
 
-      <!-- 4. PROCESS SECTION -->
       <section id="process" class="reveal">
         <span class="mono mono-kicker" data-i18n="process_kicker">Flujo de trabajo</span>
         <h2 data-i18n="process_title">Cómo Trabajamos</h2>
@@ -189,32 +183,33 @@
           <div class="process-card">
             <span class="process-step">01</span>
             <h3 data-i18n="prc_1_title">Briefing</h3>
-            <p data-i18n="prc_1_desc">Analizamos tu visión musical o la identidad de tu marca para armar un moodboard y concepto estético sólido.</p>
+            <p data-i18n="prc_1_desc">Analizamos tu visión para armar un moodboard y concepto estético sólido.</p>
           </div>
           <div class="process-card">
             <span class="process-step">02</span>
             <h3 data-i18n="prc_2_title">Desarrollo 3D</h3>
-            <p data-i18n="prc_2_desc">Modelado, texturizado, iluminación cinematográfica y animación cuadro por cuadro usando software de vanguardia.</p>
+            <p data-i18n="prc_2_desc">Modelado, texturizado, iluminación cinematográfica y animación profesional</p>
           </div>
           <div class="process-card">
             <span class="process-step">03</span>
             <h3 data-i18n="prc_3_title">Post y Entrega</h3>
-            <p data-i18n="prc_3_desc">Corrección de color, VFX finales y exportación en formatos listos para explotar tus plataformas de distribución.</p>
+            <p data-i18n="prc_3_desc">Corrección de color, VFX finales , exportación en formatos listos para publicar y feedback durante el proceso</p>
           </div>
         </div>
       </section>
 
-      <!-- 5. ABOUT SECTION -->
       <section id="about" class="reveal">
         <span class="mono mono-kicker" data-i18n="about_kicker">El Director · Agustín Muñoz</span>
-        <h2 data-i18n="about_title">Detrás de Jase Planet</h2>
-        <p id="about-text-p" data-i18n="about_text">Soy el fundador y artista principal de Jase Planet. No solo muevo polígonos en Blender; traduzco ritmos, emociones y narrativas complejas en piezas digitales de alta retención. Con un flujo optimizado, cubro desde el diseño de mundos hasta guiones de obras originales como 'Love Between Worlds', asegurando que cada proyecto se sienta único y memorable.</p>
+        <h2 data-i18n="about_title">¿Qué es Jase Planet?</h2>
+        <p id="about-text-p" data-i18n="about_text">Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual.
+
+Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.</p>
       </section>
     </div>
 
     <aside class="viewer">
       <canvas id="three-canvas"></canvas>
-      <span class="mono viewer-label" data-i18n="viewer_label">Alex · 3D Model</span>
+      <span class="mono viewer-label" data-i18n="viewer_label">Alex · Modelo 3D</span>
     </aside>
   </div>
 </main>
@@ -227,10 +222,10 @@
     </div>
 
     <form id="contact-form" class="reveal">
-      <!-- CAMPOS OCULTOS REQUERIDOS PARA CHIPS DE FORMSUBMIT -->
-      <input type="hidden" name="characters" id="hidden-characters" value="-">
-      <input type="hidden" name="style" id="hidden-style" value="-">
-      <input type="hidden" name="duration" id="hidden-duration" value="-">
+      <!-- Inputs ocultos para resolver problemas de envío AJAX con FormSubmit -->
+      <input type="hidden" name="selected_characters" id="hidden-characters" value="-">
+      <input type="hidden" name="selected_style" id="hidden-style" value="-">
+      <input type="hidden" name="selected_duration" id="hidden-duration" value="-">
 
       <div class="row2">
         <div class="field"><label class="mono" data-i18n="f_name">Nombre</label><input type="text" name="name" required></div>
@@ -240,7 +235,7 @@
 
       <div class="field">
         <label class="mono" data-i18n="f_characters">Personajes</label>
-        <div class="chips" data-group="characters">
+        <div class="chips" data-group="characters" data-target="hidden-characters">
           <button type="button" class="chip" data-value="one" data-i18n="ch_one">Un personaje</button>
           <button type="button" class="chip" data-value="many" data-i18n="ch_many">Más de uno</button>
           <button type="button" class="chip" data-value="none" data-i18n="ch_none">Ninguno</button>
@@ -249,7 +244,7 @@
 
       <div class="field">
         <label class="mono" data-i18n="f_style">Estilo</label>
-        <div class="chips" data-group="style">
+        <div class="chips" data-group="style" data-target="hidden-style">
           <button type="button" class="chip" data-value="cartoon">Cartoon</button>
           <button type="button" class="chip" data-value="realista" data-i18n="st_real">Realista</button>
           <button type="button" class="chip" data-value="cartoon-realista" data-i18n="st_cr">Cartoon Realista</button>
@@ -262,7 +257,7 @@
 
       <div class="field">
         <label class="mono" data-i18n="f_duration">Duración</label>
-        <div class="chips" data-group="duration">
+        <div class="chips" data-group="duration" data-target="hidden-duration">
           <button type="button" class="chip" data-value="loop" data-i18n="du_loop">Loop 15-30 seg</button>
           <button type="button" class="chip" data-value="1min" data-i18n="du_1m">1 Minuto</button>
           <button type="button" class="chip" data-value="song" data-i18n="du_song">Una Canción</button>
@@ -316,7 +311,7 @@ const I18N = {
     form_error:"No se pudo enviar el mensaje. Probá de nuevo o escribime a imjaseplanet@gmail.com",
     hero_kicker:"Creative 3D Studio · Buenos Aires",
     hero_title:"Tu música no solo se escucha. Se vive.",
-    hero_text:"Creamos universos 3D y animaciones cinematográficas hiperrealistas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.",
+    hero_text:"Creamos universos 3D y animaciones cinematográficas para artistas y marcas que no sintonizan con lo ordinario y exigen un impacto visual masivo.",
     hero_cta_primary:"Iniciar Proyecto",
     hero_cta_secondary:"Ver Trabajos",
     works_kicker:"Selección · 2024 — 2026",
@@ -324,28 +319,28 @@ const I18N = {
     services_kicker:"Soluciones visuales",
     services_title:"Servicios de Alto Impacto",
     srv_1_title:"Music Visualizers",
-    srv_1_desc:"Transformamos lanzamientos musicales en experiencias estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.",
+    srv_1_desc:"Transformamos lanzamientos musicales en joyas unicas para YouTube, Spotify y pantallas de shows en vivo.",
     srv_2_title:"Character Design",
-    srv_2_desc:"Diseño de avatares icónicos, personajes con estéticas Cyberpunk o estilizadas y assets virtuales con identidad propia desde cero.",
+    srv_2_desc:"Diseño de personajes unicos con identidad propia desde 0",
     srv_3_title:"Contenido de Marca",
     srv_3_desc:"Teasers, intros y transiciones dinámicas en 3D para creadores y marcas que buscan romper la retención tradicional en redes.",
     process_kicker:"Flujo de trabajo",
     process_title:"Cómo Trabajamos",
-    prc_1_title:"01 · Briefing",
-    prc_1_desc:"Analizamos tu visión musical o la identidad de tu marca para armar un moodboard y concepto estético sólido.",
-    prc_2_title:"02 · Desarrollo 3D",
-    prc_2_desc:"Modelado, texturizado, iluminación cinematográfica y animación cuadro por cuadro usando software de vanguardia.",
-    prc_3_title:"03 · Post y Entrega",
-    prc_3_desc:"Corrección de color, VFX finales y exportación en formatos listos para explotar tus plataformas de distribución.",
+    prc_1_title:"Briefing",
+    prc_1_desc:"Analizamos tu visión para armar un moodboard y concepto estético sólido.",
+    prc_2_title:"Desarrollo 3D",
+    prc_2_desc:"Modelado, texturizado, iluminación cinematográfica y animación profesional",
+    prc_3_title:"Post y Entrega",
+    prc_3_desc:"Corrección de color, VFX finales , exportación en formatos listos para publicar y feedback durante el proceso",
     about_kicker:"El Director · Agustín Muñoz",
-    about_title:"Detrás de Jase Planet",
-    about_text:"Soy el fundador y artista principal de Jase Planet. No solo muevo polígonos en Blender; traduzco ritmos, emociones y narrativas complejas en piezas digitales de alta retención. Con un flujo optimizado, cubro desde el diseño de mundos hasta guiones de una obra original como 'Love Between Worlds', asegurando que cada proyecto se sienta único y memorable.",
+    about_title:"¿Qué es Jase Planet?",
+    about_text:"Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual.\n\nActualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.",
     viewer_label:"Alex · Modelo 3D",
     cta_title:"¿Listo para crear un universo visual propio?",
     cta_sub:"Completá el formulario detallando tu idea y nos ponemos en marcha. Respondo en menos de 24 horas.",
     f_name:"Nombre",f_country:"País",f_email:"Email",
     f_characters:"Personajes",ch_one:"Un personaje",ch_many:"Más de uno",ch_none:"Ninguno",
-    f_style:"Estilo",st_real:"Realista",st_cr:"Cartoon Realista",st_other:"Otro estilo",
+    f_style:"Estilo",st_real:"Realista",st_cr:"Cartoon Realistic",st_other:"Otro estilo",
     f_duration:"Duración",du_loop:"Loop 15-30 seg",du_1m:"1 Minuto",du_song:"Una Canción",du_other:"Otra Duración",
     f_idea:"Tu idea",ph_idea:"Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc.",
     f_send:"Enviar Consulta",
@@ -382,7 +377,7 @@ const I18N = {
     form_error:"Couldn't send the message. Try again or email imjaseplanet@gmail.com",
     hero_kicker:"Creative 3D Studio · Buenos Aires",
     hero_title:"Your music shouldn't just be heard. It must be lived.",
-    hero_text:"We design 3D universes and hyper-realistic cinematic animations for artists and brands who refuse to settle for ordinary and demand massive visual impact.",
+    hero_text:"We design 3D universes and cinematic animations for artists and brands who refuse to settle for ordinary and demand massive visual impact.",
     hero_cta_primary:"Start Project",
     hero_cta_secondary:"View Works",
     works_kicker:"Selected · 2024 — 2026",
@@ -390,22 +385,22 @@ const I18N = {
     services_kicker:"Visual Solutions",
     services_title:"High-Impact Services",
     srv_1_title:"Music Visualizers",
-    srv_1_desc:"We transform musical releases into hypnotic aesthetic experiences optimized for YouTube, Spotify, and live show screens.",
+    srv_1_desc:"We transform musical releases into unique gems for YouTube, Spotify, and live show screens.",
     srv_2_title:"Character Design",
-    srv_2_desc:"Design of iconic avatars, characters with Cyberpunk or highly stylized aesthetics, and virtual assets with their own identity from scratch.",
+    srv_2_desc:"Design of unique characters with their own identity from 0",
     srv_3_title:"Brand Content",
     srv_3_desc:"Teasers, intros, and dynamic 3D transitions for creators and brands looking to break through traditional audience retention on social media.",
     process_kicker:"Workflow",
     process_title:"How We Work",
-    prc_1_title:"01 · Briefing",
-    prc_1_desc:"We analyze your musical vision or brand identity to put together a solid moodboard and aesthetic concept.",
-    prc_2_title:"02 · 3D Development",
-    prc_2_desc:"Modeling, texturing, cinematic lighting, and frame-by-frame animation using cutting-edge industry software.",
-    prc_3_title:"03 · Post & Delivery",
-    prc_3_desc:"Color grading, final VFX, and exporting in formats ready to explode across your distribution platforms.",
+    prc_1_title:"Briefing",
+    prc_1_desc:"We analyze your vision to put together a solid moodboard and aesthetic concept.",
+    prc_2_title:"3D Development",
+    prc_2_desc:"Modeling, texturing, cinematic lighting, and professional animation",
+    prc_3_title:"Post & Delivery",
+    prc_3_desc:"Color grading, final VFX, exporting in ready-to-publish formats, and feedback throughout the process",
     about_kicker:"The Director · Agustín Muñoz",
-    about_title:"Behind Jase Planet",
-    about_text:"I'm the founder and lead artist of Jase Planet. I don't just move polygons in Blender; I translate rhythms, emotions, and complex narratives into high-retention digital pieces. With an optimized workflow, I handle everything from world design to screenwriting for original works like 'Love Between Worlds', ensuring every project feels unique and unforgettable.",
+    about_title:"What is Jase Planet?",
+    about_text:"I'm Agustín Muñoz, the founder of Jase Planet, a creative studio specialized in 3D animation and visual content. With over 3 years of experience, I work with Blender 5, Daz3D, After Effects, and Premiere Pro to develop projects with their own identity and high visual impact.\n\nCurrently, I am finalizing the script for 'Love Between Worlds', an original work that reflects my focus on creating stories, characters, and universes of my own. I am based in Buenos Aires, Argentina, and I offer 24/7 availability for projects, collaborations, and commissioned work. My goal is to transform ideas into visual gems that make an impact and connect with their audience.",
     viewer_label:"Alex · 3D Model",
     cta_title:"Ready to create your own visual universe?",
     cta_sub:"Fill out the form detailing your idea and let's get moving. I reply in less than 24 hours.",
@@ -549,49 +544,38 @@ renderWorks();
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// MANEJO MEJORADO DE CHIPS CON PREVENCIÓN DE ACCIONES INCORRECTAS
+// Manejo inteligente de los chips para llenar los inputs ocultos
 document.querySelectorAll('.chips').forEach(group=>{
   group.addEventListener('click',e=>{
-    const chip = e.target.closest('.chip');
-    if(!chip) return;
-    e.preventDefault(); // Evita cualquier trigger raro en formularios
+    if(!e.target.classList.contains('chip')) return;
     group.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
-    chip.classList.add('selected');
+    e.target.classList.add('selected');
+    
+    const targetId = group.getAttribute('data-target');
+    if(targetId){
+      document.getElementById(targetId).value = e.target.getAttribute('data-value') || e.target.textContent.trim();
+    }
   });
 });
 
-// ENVÍO PROCESANDO LOS INPUTS OCULTOS DE LOS CHIPS SELECCIONADOS
 document.getElementById('contact-form').addEventListener('submit',async e=>{
   e.preventDefault();
   const f = e.target;
   const submitBtn = f.querySelector('button.submit');
   
-  const get = n => (f.querySelector(`[name="${n}"]`)?.value || '').trim() || '-';
-  
-  // Función para capturar dinámicamente el chip seleccionado
-  const sel = g => {
-    const el = document.querySelector(`[data-group="${g}"] .chip.selected`);
-    return el ? el.textContent.trim() : '-';
-  };
-
-  // Mapeamos a los inputs ocultos por si acaso, pero armamos directamente el JSON Payload
-  document.getElementById('hidden-characters').value = sel('characters');
-  document.getElementById('hidden-style').value = sel('style');
-  document.getElementById('hidden-duration').value = sel('duration');
-
   const payload = {
-    name: get('name'),
-    country: get('country'),
-    email: get('email'),
-    characters: sel('characters'),
-    style: sel('style'),
-    duration: sel('duration'),
-    idea: get('idea'),
-    _subject: 'New project inquiry — ' + get('name'),
+    name: (f.querySelector('[name="name"]')?.value || '').trim(),
+    country: (f.querySelector('[name="country"]')?.value || '').trim() || '-',
+    email: (f.querySelector('[name="email"]')?.value || '').trim(),
+    characters: document.getElementById('hidden-characters').value,
+    style: document.getElementById('hidden-style').value,
+    duration: document.getElementById('hidden-duration').value,
+    idea: (f.querySelector('[name="idea"]')?.value || '').trim() || '-',
+    _subject: 'New project inquiry — ' + (f.querySelector('[name="name"]')?.value || ''),
     _template: 'table',
     _captcha: 'false'
   };
-
+  
   let status = document.getElementById('form-status');
   if(!status){
     status = document.createElement('div');
@@ -607,7 +591,7 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
   
   const oldLabel = submitBtn.textContent;
   submitBtn.disabled = true;
-
+  
   try {
     const res = await fetch('https://formsubmit.co/ajax/imjaseplanet@gmail.com', {
       method:'POST',
@@ -621,6 +605,9 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
     status.textContent = I18N[currentLang].form_success;
     f.reset();
     document.querySelectorAll('.chip.selected').forEach(c=>c.classList.remove('selected'));
+    document.getElementById('hidden-characters').value = '-';
+    document.getElementById('hidden-style').value = '-';
+    document.getElementById('hidden-duration').value = '-';
   } catch(err){
     console.error('[contact-form] send failed', err);
     status.style.background='rgba(239,68,68,0.12)';
