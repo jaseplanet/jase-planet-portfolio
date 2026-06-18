@@ -76,7 +76,7 @@
   
   footer{position:relative;z-index:2;margin-top:120px;padding:80px 36px 30px;border-top:1px solid var(--border);background:rgba(10,11,11,0.6)}
   .footer-inner{max-width:1100px;margin:0 auto}
-  .footer-hero text-align:center;margin-bottom:60px}
+  .footer-hero {text-align:center;margin-bottom:60px}
   .footer-hero h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:18px}
   .footer-hero p{color:var(--muted);max-width:600px;margin:0 auto;font-size:1rem}
   form{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
@@ -162,7 +162,7 @@
         <div class="services-grid">
           <div class="service-card">
             <h3 data-i18n="srv_1_title">Music Visualizers</h3>
-            <p data-i18n="srv_1_desc">Transformamos lanzamientos musicales en experiencias estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.</p>
+            <p data-i18n="srv_1_desc">Transformamos lanzamientos musicales en experiences estéticas hipnóticas optimizadas para YouTube, Spotify y pantallas de shows en vivo.</p>
           </div>
           <div class="service-card">
             <h3 data-i18n="srv_2_title">Character Design</h3>
@@ -218,15 +218,15 @@
       <p data-i18n="cta_sub">Completá el formulario detallando tu idea y nos ponemos en marcha. Respondo en menos de 24 horas.</p>
     </div>
 
-    <!-- CONFIGURACIÓN DE ENVÍO DIRECTO FORZADO POR NAVEGADOR -->
+    <!-- FORMULARIO INTEGRADO CON FORMSUBMIT -->
     <form id="contact-form" class="reveal" action="https://formsubmit.co/imjaseplanet@gmail.com" method="POST">
       <!-- Inputs ocultos para recolectar las elecciones de los chips -->
-      <input type="hidden" name="Personajes Elegidos" id="hidden-characters" value="-">
-      <input type="hidden" name="Estilo Elegido" id="hidden-style" value="-">
-      <input type="hidden" name="Duracion Elegida" id="hidden-duration" value="-">
+      <input type="hidden" name="Personajes" id="hidden-characters" value="No seleccionado">
+      <input type="hidden" name="Estilo" id="hidden-style" value="No seleccionado">
+      <input type="hidden" name="Duracion" id="hidden-duration" value="No seleccionado">
       
-      <!-- Redirección automática limpia a tu propio dominio de Vercel tras enviar -->
-      <input type="hidden" name="_next" value="https://jaseplanet-c3lmevt8w-jaseplanets-projects.vercel.app">
+      <!-- Redirección automática limpia a tu dominio principal de Vercel tras enviar -->
+      <input type="hidden" name="_next" value="https://jaseplanet.com">
 
       <div class="row2">
         <div class="field"><label class="mono" data-i18n="f_name">Nombre</label><input type="text" name="Nombre" required></div>
@@ -462,255 +462,48 @@ function renderWorks(){
     card.querySelector('.thumb').addEventListener('click', function(){
       if(this.querySelector('iframe')) return;
       const id = this.dataset.vid;
-      this.innerHTML = `
-        <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;">
-        </iframe>`;
+      this.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:8px;"></iframe>`;
     });
-
-    card.querySelector('.view-yt-btn').addEventListener('click', function(e){
-      e.stopPropagation();
-      window.open('https://www.youtube.com/watch?v='+this.dataset.vid, '_blank', 'noopener');
+    
+    card.querySelector('.view-yt-btn').addEventListener('click', function(){
+      const id = this.dataset.vid;
+      window.open(`https://www.youtube.com/watch?v=${id}`, '_blank');
     });
+    
     grid.appendChild(card);
   });
 }
-renderWorks();
 
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// MANEJO MEJORADO DE CHIPS CON PREVENCIÓN DE ACCIONES INCORRECTAS
-document.querySelectorAll('.chips').forEach(group=>{
-  group.addEventListener('click',e=>{
-    const chip = e.target.closest('.chip');
-    if(!chip) return;
-    e.preventDefault();
-    group.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
-    chip.classList.add('selected');
-    
-    // Inyectamos el valor inmediatamente al campo oculto correspondiente para el envío nativo
-    const groupName = group.getVertexAttribute ? group.getVertexAttribute('data-group') : group.getAttribute('data-group');
-    const hiddenInput = document.getElementById(`hidden-${groupName}`);
-    if(hiddenInput) hiddenInput.value = chip.textContent.trim();
+// LOGICA CORREGIDA PARA CHIPS Y SUBMIT DIRECTO
+document.querySelectorAll('.chips .chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    const parent = this.parentElement;
+    parent.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
   });
 });
 
-// LOGICA ESTRUCTURADA ASOCIADA AL ENVÍO NATIVO DE FORMULARIO
-document.getElementById('contact-form').addEventListener('submit', e => {
-  const sel = g => {
-    const el = document.querySelector(`[data-group="${g}"] .chip.selected`);
-    return el ? el.textContent.trim() : 'No seleccionado';
+document.getElementById('contact-form').addEventListener('submit', function() {
+  const getSelected = (g) => {
+    const active = document.querySelector(`[data-group="${g}"] .chip.selected`);
+    return active ? active.textContent.trim() : 'No seleccionado';
   };
-
-  // Aseguramos la sincronización de los chips en los campos ocultos antes del envío definitivo
-  document.getElementById('hidden-characters').value = sel('characters');
-  document.getElementById('hidden-style').value = sel('style');
-  document.getElementById('hidden-duration').value = sel('duration');
-  
-  // El navegador continuará de forma nativa enviando el formulario hacia FormSubmit sin bloquearse por Vercel.
+  document.getElementById('hidden-characters').value = getSelected('characters');
+  document.getElementById('hidden-style').value = getSelected('style');
+  document.getElementById('hidden-duration').value = getSelected('duration');
 });
 
-const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// Inicializaciones
+document.getElementById('year').textContent = new Date().getFullYear();
+applyLang('es');
 
-(function(){
-  const cv = document.getElementById('particles-canvas');
-  const ctx = cv.getContext('2d');
-  let W,H,particles=[];
-  const mouse = {x:-9999,y:-9999,active:false,mode:'hover'};
-  function resize(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
-  resize();addEventListener('resize',resize);
-
-  const COLORS = ['#374040','#781327'];
-  const N = Math.min(420, Math.floor(innerWidth*innerHeight/3500));
-  for(let i=0;i<N;i++){
-    particles.push({
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3,
-      r:(Math.random()*2.2+0.8)*devicePixelRatio,
-      c:COLORS[Math.random()<0.75?0:1]
-    });
-  }
-
-  addEventListener('pointermove',e=>{mouse.x=e.clientX*devicePixelRatio;mouse.y=e.clientY*devicePixelRatio;mouse.active=true;});
-  addEventListener('pointerleave',()=>{mouse.active=false;mouse.x=mouse.y=-9999;});
-  addEventListener('mousedown',e=>{
-    if(e.button===0) mouse.mode='attract';
-    else if(e.button===2) mouse.mode='repel';
-  });
-  addEventListener('mouseup',()=>{mouse.mode='hover'});
-  addEventListener('contextmenu',e=>e.preventDefault());
-
-  function step(){
-    ctx.clearRect(0,0,W,H);
-    const R = 180*devicePixelRatio;
-    for(const p of particles){
-      if(mouse.active){
-        const dx=mouse.x-p.x, dy=mouse.y-p.y;
-        const d2=dx*dx+dy*dy, d=Math.sqrt(d2);
-        if(d<R && d>0.1){
-          const force = (1-d/R);
-          let f = 0;
-          if(mouse.mode==='attract') f = force*0.6;
-          else if(mouse.mode==='repel') f = -force*1.2;
-          else f = force*0.12;
-          p.vx += (dx/d)*f*0.15; p.vy += (dy/d)*f*0.15;
-        }
-      }
-      p.vx *= 0.96; p.vy *= 0.96;
-      p.vx += (Math.random()-0.5)*0.01; p.vy += (Math.random()-0.5)*0.01;
-      p.x += p.vx; p.y += p.vy;
-      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-
-      ctx.globalAlpha = p.c==='#781327'?0.85:0.55;
-      ctx.fillStyle = p.c;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-    }
-    ctx.globalAlpha = 0.08;
-    ctx.strokeStyle = '#374040';
-    ctx.lineWidth = devicePixelRatio*0.5;
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const a=particles[i],b=particles[j];
-        const dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
-        const max=90*devicePixelRatio;
-        if(d2<max*max){
-          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(step);
-  }
-  step();
-})();
+// Animación de Scroll Reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+reveals.forEach(r => observer.observe(r));
 </script>
 
-<script type="module">
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-
-const canvas = document.getElementById('three-canvas');
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer({canvas, antialias: true, alpha: true});
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.4;
-
-const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-camera.position.set(0,1.4,3.2); camera.lookAt(0,1.2,0);
-
-const W = 420, H = 640;
-renderer.setSize(W, H, false);
-canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-camera.aspect = W / H; camera.updateProjectionMatrix();
-
-const pmremGenerator = new THREE.PMREMGenerator(renderer);
-const envTexture = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environment = envTexture;
-
-function sizeCanvas(){
-  const r = canvas.getBoundingClientRect();
-  const w = r.width || 380; const h = r.height || 600;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h; camera.updateProjectionMatrix();
-}
-
-const key = new THREE.DirectionalLight(0xffffff, 2.5); key.position.set(2,3,3); scene.add(key);
-const rim = new THREE.DirectionalLight(0x22d3ee, 1.2); rim.position.set(-3,2,-2); scene.add(rim);
-const fill = new THREE.DirectionalLight(0x781327, 0.9); fill.position.set(-1,1,3); scene.add(fill);
-scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-
-sizeCanvas(); setTimeout(sizeCanvas, 200); addEventListener('resize',sizeCanvas);
-
-const placeholder = new THREE.Group();
-const head = new THREE.Mesh(new THREE.SphereGeometry(0.45,32,32), new THREE.MeshStandardMaterial({color:0xeeeeee,roughness:0.45,metalness:0.1}));
-head.position.y=1.55;
-const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.35,0.8,8,16), new THREE.MeshStandardMaterial({color:0x222426,roughness:0.6}));
-body.position.y=0.85;
-placeholder.add(head); placeholder.add(body); scene.add(placeholder);
-let model = placeholder; let baseY = 0;
-
-const loader = new GLTFLoader();
-const GLB_PATH = 'alex2.glb';
-
-renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-key.castShadow = true; key.shadow.mapSize.set(1024,1024);
-key.shadow.camera.near = 0.1; key.shadow.camera.far = 20;
-key.shadow.camera.left = -3; key.shadow.camera.right = 3; key.shadow.camera.top = 3; key.shadow.camera.bottom = -3;
-key.shadow.bias = -0.0005;
-
-const shadowFloor = new THREE.Mesh(new THREE.PlaneGeometry(6,6), new THREE.ShadowMaterial({opacity:0.35}));
-shadowFloor.rotation.x = -Math.PI/2; shadowFloor.receiveShadow = true; scene.add(shadowFloor);
-
-loader.load(GLB_PATH, gltf => {
-  scene.remove(placeholder);
-  placeholder.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material) o.material.dispose && o.material.dispose(); });
-  model = gltf.scene;
-
-  model.traverse(child => {
-    if (child.isMesh) {
-      child.frustumCulled = false; child.castShadow = true; child.receiveShadow = false;
-      const mats = Array.isArray(child.material) ? child.material : [child.material];
-      mats.forEach(mat => {
-        if(!mat) return;
-        ['map','emissiveMap','normalMap','roughnessMap','metalnessMap','aoMap','alphaMap'].forEach(slot=>{
-          const tex = mat[slot];
-          if(tex){
-            if(slot==='map' || slot==='emissiveMap') tex.colorSpace = THREE.SRGBColorSpace;
-            tex.needsUpdate = true;
-          }
-        });
-        if(mat.map && mat.map.image){ mat.transparent = true; mat.alphaTest = mat.alphaTest || 0.5; mat.side = THREE.DoubleSide; }
-        if(mat.alphaMap){ mat.transparent = true; }
-        if(child.geometry && child.geometry.attributes && child.geometry.attributes.color){ mat.vertexColors = true; }
-        mat.envMapIntensity = 1.0; mat.needsUpdate = true;
-      });
-    }
-  });
-
-  const box = new THREE.Box3().setFromObject(model);
-  const size = box.getSize(new THREE.Vector3());
-  const targetHeight = 2.0;
-  const scale = targetHeight / Math.max(size.y, 0.0001);
-  model.scale.setScalar(scale);
-
-  const box2 = new THREE.Box3().setFromObject(model);
-  const c2 = box2.getCenter(new THREE.Vector3());
-  const s2 = box2.getSize(new THREE.Vector3());
-  model.position.x -= c2.x; model.position.z -= c2.z; model.position.y -= box2.min.y;
-
-  shadowFloor.position.y = 0;
-  const charHeight = s2.y;
-  const fov = camera.fov * Math.PI/180;
-  const dist = (charHeight/0.7) / (2*Math.tan(fov/2));
-  camera.position.set(0, charHeight*0.55, dist + 0.2);
-  camera.lookAt(0, charHeight*0.5, 0); camera.updateProjectionMatrix();
-
-  baseY = model.position.y; scene.add(model);
-});
-
-const target = {x:0,y:0};
-addEventListener('pointermove',e=>{
-  target.y = ((e.clientX/innerWidth)*2-1) * (Math.PI/2);
-  target.x = ((e.clientY/innerHeight)*2-1) * 0.35;
-});
-
-const start = performance.now();
-function loop(){
-  const t = (performance.now()-start)/1000;
-  if(model){
-    model.rotation.y += (target.y - model.rotation.y)*0.08;
-    model.rotation.x += (target.x - model.rotation.x)*0.08;
-    model.position.y = baseY + Math.sin(t*1.4)*0.04;
-  }
-  renderer.render(scene,camera);
-  requestAnimationFrame(loop);
-}
-loop();
-</script>
 </body>
 </html>
