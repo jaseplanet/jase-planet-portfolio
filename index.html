@@ -116,7 +116,7 @@
     button.submit{align-self:center}
   }
 
-  /* ESTILOS PREMIUM PARA INSTAGRAM */
+  /* BOTÓN FLOTANTE PERMANENTE E INTELIGENTE */
   .ig-floating-btn {
     position: fixed;
     bottom: 24px;
@@ -137,11 +137,7 @@
     letter-spacing: 0.1em;
     box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-  }
-  .ig-floating-btn.visible {
+    /* Siempre visible desde el inicio */
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -179,6 +175,16 @@
     border-color: var(--accent);
     color: #fff;
     background: rgba(120,19,39,0.1);
+  }
+
+  /* Ajuste para que en celu el botón flotante no estorbe */
+  @media (max-width: 640px) {
+    .ig-floating-btn {
+      bottom: 16px;
+      right: 16px;
+      padding: 10px 16px;
+      font-size: 0.68rem;
+    }
   }
 </style>
 </head>
@@ -365,7 +371,7 @@ Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra origin
 
 <a href="https://www.instagram.com/jaseplanet/" target="_blank" rel="noopener" class="ig-floating-btn" id="ig-float">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-  <span>¿Preferís DM?</span>
+  <span>¿Preferís MD?</span>
 </a>
 
 <script type="importmap">
@@ -461,7 +467,7 @@ const I18N = {
     services_kicker:"Visual Solutions",
     services_title:"High-Impact Services",
     srv_1_title:"Music Visualizers",
-    srv_1_desc:"We transform musical releases into unique gems for YouTube, Spotify, and live show screens.",
+    srv_1_desc:"We transform musical releases into unique gems for YouTube, Spotify and live show screens.",
     srv_2_title:"Character Design",
     srv_2_desc:"Design of unique characters with their own identity from 0",
     srv_3_title:"Brand Content",
@@ -620,7 +626,7 @@ renderWorks();
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Manejo inteligente de los chips para llenar los inputs ocultos
+// Chips inputs
 document.querySelectorAll('.chips').forEach(group=>{
   group.addEventListener('click',e=>{
     if(!e.target.classList.contains('chip')) return;
@@ -766,16 +772,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   }
   step();
 })();
-
-// Mostrar/Ocultar botón flotante de Instagram según el scroll
-const igFloatBtn = document.getElementById('ig-float');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    igFloatBtn.classList.add('visible');
-  } else {
-    igFloatBtn.classList.remove('visible');
-  }
-});
 </script>
 
 <script type="module">
