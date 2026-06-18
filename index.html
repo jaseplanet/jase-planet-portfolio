@@ -116,72 +116,64 @@
     button.submit{align-self:center}
   }
 
-  /* BOTÓN FLOTANTE PERMANENTE E INTELIGENTE */
-  .ig-floating-btn {
+  /* CONTENEDOR FIJO PARA AMBOS BOTONES (SE QUEDAN AL SCROLLEAR) */
+  .fixed-actions-container {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    background: #000000;
-    color: var(--fg);
-    border: 1px solid var(--border);
-    padding: 12px 20px;
-    border-radius: 999px;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    z-index: 99;
+    flex-direction: column; /* Uno arriba del otro */
+    gap: 12px; /* Espacio de separación entre ambos */
+    z-index: 999; /* Para que queden siempre por encima de todo */
+  }
+
+  .btn-fixed {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    /* Siempre visible desde el inicio */
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .ig-floating-btn:hover {
-    border-color: var(--accent);
-    box-shadow: 0 12px 28px -10px rgba(120,19,39,0.7);
-    transform: translateY(-2px);
-  }
-  .form-or-ig {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-  }
-  .btn-secondary-ig {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 14px 28px;
-    border-radius: 999px;
-    cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.78rem;
-    transition: all .25s;
     text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 999px;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-  }
-  .btn-secondary-ig:hover {
-    border-color: var(--accent);
-    color: #fff;
-    background: rgba(120,19,39,0.1);
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
   }
 
-  /* Ajuste para que en celu el botón flotante no estorbe */
+  /* Botón Iniciar Proyecto (Formulario) */
+  .btn-fixed.btn-to-form {
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+  }
+  .btn-fixed.btn-to-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -10px rgba(120,19,39,0.9);
+  }
+
+  /* Botón Instagram */
+  .btn-fixed.btn-to-ig {
+    background: #000000;
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .btn-fixed.btn-to-ig:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -10px rgba(120,19,39,0.7);
+  }
+
+  /* Ajuste responsivo para celulares */
   @media (max-width: 640px) {
-    .ig-floating-btn {
+    .fixed-actions-container {
       bottom: 16px;
       right: 16px;
+      gap: 8px;
+    }
+    .btn-fixed {
       padding: 10px 16px;
       font-size: 0.68rem;
     }
@@ -369,10 +361,17 @@ Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra origin
   </div>
 </footer>
 
-<a href="https://www.instagram.com/jaseplanet/" target="_blank" rel="noopener" class="ig-floating-btn" id="ig-float">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-  <span>¿Preferís MD?</span>
-</a>
+<div class="fixed-actions-container">
+  <button onclick="document.getElementById('footer').scrollIntoView({behavior:'smooth'})" class="btn-fixed btn-to-form">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    <span>Iniciar Proyecto</span>
+  </button>
+
+  <a href="https://www.instagram.com/jaseplanet/" target="_blank" rel="noopener" class="btn-fixed btn-to-ig">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+    <span>Contactame por IG</span>
+  </a>
+</div>
 
 <script type="importmap">
 {
