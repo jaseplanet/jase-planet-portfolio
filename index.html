@@ -116,7 +116,7 @@
     button.submit{align-self:center}
   }
 
-  /* NUEVOS ESTILOS PARA INSTAGRAM DIRECTO EN TRÁFICO DE ANUNCIOS */
+  /* ESTILOS PREMIUM PARA INSTAGRAM */
   .ig-floating-btn {
     position: fixed;
     bottom: 24px;
@@ -265,7 +265,7 @@
       <section id="about" class="reveal">
         <span class="mono mono-kicker" data-i18n="about_kicker">El Director · Agustín Muñoz</span>
         <h2 data-i18n="about_title">¿Qué es Jase Planet?</h2>
-        <p id="about-text-p" data-i18n="about_text">Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propia y alto impacto visual.
+        <p id="about-text-p" data-i18n="about_text">Soy Agustín Muñoz, el fundador de Jase Planet, un estudio creativo especializado en animación 3D y contenido visual. Con más de 3 años de experiencia, trabajo con Blender 5, Daz3D, After Effects y Premiere Pro para desarrollar proyectos con identidad propio y alto impacto visual.
 
 Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra original que refleja mi enfoque en la creación de historias, personajes y universos propios. Me encuentro en Buenos Aires, Argentina, y ofrezco disponibilidad 24/7 para proyectos, colaboraciones y trabajos por encargo. Mi objetivo es transformar ideas en joyas visuales que generen impacto y conecten con su audiencia.</p>
       </section>
@@ -286,7 +286,6 @@ Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra origin
     </div>
 
     <form id="contact-form" class="reveal" action="https://api.web3forms.com/submit" method="POST">
-      <!-- Clave Web3Forms integrada -->
       <input type="hidden" name="access_key" value="e85bb970-3118-42bf-8796-2f781edc3436">
       <input type="hidden" name="selected_characters" id="hidden-characters" value="-">
       <input type="hidden" name="selected_style" id="hidden-style" value="-">
@@ -336,7 +335,13 @@ Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra origin
         <textarea name="idea" data-i18n-ph="ph_idea" placeholder="Contame brevemente qué tenés en mente para ponernos en marcha: referencias, mood, etc."></textarea>
       </div>
 
-      <button type="submit" class="submit" data-i18n="f_send">Enviar Consulta</button>
+      <div class="form-or-ig">
+        <button type="submit" class="submit" data-i18n="f_send">Enviar Consulta</button>
+        <a href="https://www.instagram.com/jaseplanet/" target="_blank" rel="noopener" class="btn-secondary-ig">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          O escribime al DM
+        </a>
+      </div>
     </form>
 
     <div class="footer-bottom">
@@ -357,6 +362,11 @@ Actualmente estoy finalizando el guion de 'Love Between Worlds', una obra origin
     </div>
   </div>
 </footer>
+
+<a href="https://www.instagram.com/jaseplanet/" target="_blank" rel="noopener" class="ig-floating-btn" id="ig-float">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+  <span>¿Preferís DM?</span>
+</a>
 
 <script type="importmap">
 {
@@ -644,10 +654,7 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
   
   submitBtn.disabled = true;
 
-  // Creamos un FormData nativo que Web3Forms maneja directo vía POST standard
   const formData = new FormData(f);
-  
-  // Sincronizamos los nombres de variables que espera Web3Forms
   formData.append('subject', 'New project inquiry — ' + (f.querySelector('[name="name"]')?.value || ''));
   formData.append('characters', document.getElementById('hidden-characters').value);
   formData.append('style', document.getElementById('hidden-style').value);
@@ -671,7 +678,6 @@ document.getElementById('contact-form').addEventListener('submit',async e=>{
     document.getElementById('hidden-style').value = '-';
     document.getElementById('hidden-duration').value = '-';
 
-    // Redirección si se completó con éxito
     setTimeout(() => {
       window.location.href = f.querySelector('[name="redirect"]').value;
     }, 1500);
@@ -760,6 +766,16 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   }
   step();
 })();
+
+// Mostrar/Ocultar botón flotante de Instagram según el scroll
+const igFloatBtn = document.getElementById('ig-float');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    igFloatBtn.classList.add('visible');
+  } else {
+    igFloatBtn.classList.remove('visible');
+  }
+});
 </script>
 
 <script type="module">
